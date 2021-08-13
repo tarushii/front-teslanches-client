@@ -1,0 +1,41 @@
+.btLaranja{
+  all: unset;
+  border-radius: 1.25rem;
+  background-color: var(--laranjaEscuro);
+  padding: .5rem 2.5rem;
+  max-height: 2.5rem;
+  font-size: .875rem;
+  color: var(--branco);
+  cursor: pointer;
+}
+
+.btAzul{
+  all: unset;
+  font-size: .875rem;
+  color: var(--azulEscuro);
+  cursor: pointer;
+}
+
+.btTransparente{
+  all: unset;
+  font-style: normal;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 100%;
+  text-align: center;
+  color: #F21B1B;
+  border-radius: 1.25rem;
+  cursor: pointer;
+}
+
+.btLogout{
+  all: unset;
+  font-style: normal;
+  font-weight: 600;
+  font-size: .875rem;
+  line-height: 100%;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 1.25rem;
+  cursor: pointer;
+}
