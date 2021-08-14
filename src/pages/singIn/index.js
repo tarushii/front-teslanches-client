@@ -8,11 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import illustrationCenter from '../../assets/image-login.svg';
 // import InputPassword from '../../components/inputPassword';
-import { schemaLogin } from '../../validacoes/schema';
+import { schemaLogin } from '../../validation/schema';
 import { postNaoAutenticado } from '../../services/apiClient';
 import useAuth from '../../hooks/useAuth';
 
-export default function Login() {
+export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schemaLogin)
   });
