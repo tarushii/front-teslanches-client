@@ -34,7 +34,6 @@ export default function SingUp() {
       .fromEntries(Object
         .entries(data)
         .filter(([, value]) => value));
-    console.log(dadosAtualizados);
     if (password !== passwordCheck) {
       return toast.error('As senhas precisam ser iguais');
     }

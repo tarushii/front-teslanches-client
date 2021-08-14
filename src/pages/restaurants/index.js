@@ -12,87 +12,54 @@ import { get } from '../../services/apiClient';
 
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
-import pizzaImg from '../../assets/pizza-img.jpg';
-import doceImg from '../../assets/pizza-doce-img.jpg';
-import burgImg from '../../assets/burg-img.jpg';
-import sushiImg from '../../assets/sushi-img.jpg';
 
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
-  // const [lojas, setLojas] = useState([]);
+  const [lojas, setLojas] = useState([]);
   const [f5, setF5] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const customId = 'custom-id-yes';
 
-  const lojas = [
-    {
-      nome: 'Pizzaria',
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
-      preco: '$$$$',
-      imagem_restaurante: pizzaImg
-    },
-    {
-      nome: 'Pizzaria doce',
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
-      preco: '$$$$',
-      imagem_restaurante: doceImg
-    },
-    {
-      nome: 'Hamburgueria',
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
-      preco: '$$$$',
-      imagem_restaurante: burgImg
-    },
-    {
-      nome: 'Sushi',
-      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
-      preco: '$$$$',
-      imagem_restaurante: sushiImg
-    },
-  ];
+  useEffect(() => {
+    setF5(false);
+    async function buscarRestaurantes() {
+      try {
+        const { dados, ok } = await get('/restaurantes', token);
 
-  // useEffect(() => {
-  //   setF5(false);
-  //   async function buscarRestaurantes() {
-  //     try {
-  //       const { dados, ok } = await get('/restaurantes', token);
+        if (!ok) {
+          toast.error(dados, { toastId: customId });
+          return;
+        }
+        setLojas(dados);
+      } catch (error) {
+        toast.error(error.message, { toastId: customId });
+      }
+    }
 
-  //       if (!ok) {
-  //         toast.error(dados, { toastId: customId });
-  //         return;
-  //       }
-  //       setLojas(lista);
-  //     } catch (error) {
-  //       toast.error(error.message, { toastId: customId });
-  //     }
-  //   }
+    const buscarUsuario = async () => {
+      try {
+        const { dados, ok } = await get('/usuario', token);
 
-  //   const buscarUsuario = async () => {
-  //     try {
-  //       const { dados, ok } = await get('/usuario', token);
+        if (!ok) {
+          return toast.error(`erro${dados}`);
+        }
+        toast.success(dados);
 
-  //       if (!ok) {
-  //         return toast.error(`erro${dados}`);
-  //       }
-  //       toast.success(dados);
+        return setUsuario(dados);
+      } catch (error) {
+        return toast.error(error.message);
+      }
+    };
 
-  //       return setUsuario(dados);
-  //     } catch (error) {
-  //       return toast.error(error.message);
-  //     }
-  //   };
-
-  //   buscarUsuario();
-  //   buscarRestaurantes();
-  // }, [token, f5]);
-
-  setUsuario(user);
-
+    buscarUsuario();
+    buscarRestaurantes();
+  }, [token, f5]);
+  console.log(user);
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
         <div className="flexRow contentBetween itemsCenter">
-          <h1 className="nomeRestaurante">{ usuario.nome }</h1>
+          <h1 className="nomeRestaurante">{ user.NomeUsuario }</h1>
           <button className="btLogout logout" type="button" onClick={deslogar}>Logout</button>
           <img id="logoRestaurante" src={logoRestaurante} alt="logo pag restaurante" />
         </div>

@@ -38,7 +38,7 @@ export default function SignIn() {
 
       logar(dados.usuario, dados.tokenUsuario);
 
-      history.push('/produtos');
+      history.push('/restaurantes');
     } catch (error) {
       toast.error(error.message, { toastId: customId });
       setErro(`Erro:${error.message}`);
