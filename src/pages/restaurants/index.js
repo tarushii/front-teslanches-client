@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-use-before-define */
@@ -16,6 +17,7 @@ import logoRestaurante from '../../assets/logo-restaurantes.svg';
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
   const [lojas, setLojas] = useState([]);
+  const [filtroLojas, setFiltroLojas] = useState([]);
   const [f5, setF5] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const customId = 'custom-id-yes';
@@ -54,6 +56,11 @@ export default function restaurantes() {
     buscarRestaurantes();
   }, [token, f5]);
 
+  function filtrado(loja) {
+    if (filtroLojas && loja.nome.includes(filtroLojas)) return loja;
+    if (!filtroLojas) return loja;
+  }
+
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
@@ -76,10 +83,15 @@ export default function restaurantes() {
       </div>
       <div className={`${lojas.length === 0 ? 'none' : 'contemRestaurantes'} flexColunm contentCenter itemsCenter mt2rem`}>
         <div className="contemBotao flexRow itemsCenter">
-          <input id="inputBusca" type="text" placeholder="Buscar" />
+          <input
+            id="inputBusca"
+            type="text"
+            placeholder="Buscar"
+            onChange={(e) => setFiltroLojas(e.target.value)}
+          />
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
-          { lojas.map((loja) => (
+          { lojas.filter(filtrado).map((loja) => (
             <div className="provisorio">
               <CustomCard
                 {...loja}
