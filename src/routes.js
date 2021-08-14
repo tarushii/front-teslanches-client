@@ -26,9 +26,8 @@ export default function Routes() {
           <Route path="/" exact component={SigIn} />
           <Route path="/login" component={SigIn} />
           <Route path="/cadastro" component={SingUp} />
-          <Route path="/restaurantes" component={Restaurantes} />
           <RotasProtegidas>
-            .
+            <Route path="/restaurantes" component={Restaurantes} />
           </RotasProtegidas>
         </Switch>
       </Router>
