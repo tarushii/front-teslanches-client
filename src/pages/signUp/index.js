@@ -12,9 +12,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { postNaoAutenticado } from '../../services/apiClient';
 import { schemaCadastro } from '../../validation/schema';
+import InputPassword from '../../components/inputPassword';
+
 import imageCenter from '../../assets/img-center-register.svg';
 import imageLogo from '../../assets/logo-register.svg';
-import InputPassword from '../../components/inputPassword';
 
 export default function SingUp() {
   const [password, setPassword] = useState('');
@@ -29,7 +30,6 @@ export default function SingUp() {
   });
 
   async function onSubmit(data) {
-    console.log(data);
     const { senhaConfere, ...dadosAtualizados } = Object
       .fromEntries(Object
         .entries(data)
