@@ -159,3 +159,14 @@ button.addRestaurantes{
 .flip-card-back button{
   z-index: 4;
 }
+
+#inputBusca{
+  all: unset;
+  transform: translate(9rem , 2rem);
+  height: 2.5rem;
+  width: 28.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  padding: .2rem 1.5rem;
+  color: rgba(7, 13, 27, 0.7);
+}
