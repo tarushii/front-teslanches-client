@@ -6,54 +6,87 @@ import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import illustrationTop from '../../assets/illustration-top.svg';
-// import CustomCard from '../../componentes/customCard';
+import CustomCard from '../../components/customCard';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
 
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
+import pizzaImg from '../../assets/pizza-img.jpg';
+import doceImg from '../../assets/pizza-doce-img.jpg';
+import burgImg from '../../assets/burg-img.jpg';
+import sushiImg from '../../assets/sushi-img.jpg';
 
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
-  const [lojas, setLojas] = useState([]);
+  // const [lojas, setLojas] = useState([]);
   const [f5, setF5] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const customId = 'custom-id-yes';
 
-  useEffect(() => {
-    setF5(false);
-    async function buscarRestaurantes() {
-      try {
-        const { dados, ok } = await get('/restaurantes', token);
+  const lojas = [
+    {
+      nome: 'Pizzaria',
+      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
+      preco: '$$$$',
+      imagem_restaurante: pizzaImg
+    },
+    {
+      nome: 'Pizzaria doce',
+      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
+      preco: '$$$$',
+      imagem_restaurante: doceImg
+    },
+    {
+      nome: 'Hamburgueria',
+      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
+      preco: '$$$$',
+      imagem_restaurante: burgImg
+    },
+    {
+      nome: 'Sushi',
+      descricao: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis',
+      preco: '$$$$',
+      imagem_restaurante: sushiImg
+    },
+  ];
 
-        if (!ok) {
-          toast.error(dados, { toastId: customId });
-          return;
-        }
-        setLojas(dados);
-      } catch (error) {
-        toast.error(error.message, { toastId: customId });
-      }
-    }
+  // useEffect(() => {
+  //   setF5(false);
+  //   async function buscarRestaurantes() {
+  //     try {
+  //       const { dados, ok } = await get('/restaurantes', token);
 
-    const buscarUsuario = async () => {
-      try {
-        const { dados, ok } = await get('/usuario', token);
+  //       if (!ok) {
+  //         toast.error(dados, { toastId: customId });
+  //         return;
+  //       }
+  //       setLojas(lista);
+  //     } catch (error) {
+  //       toast.error(error.message, { toastId: customId });
+  //     }
+  //   }
 
-        if (!ok) {
-          return toast.error(`erro${dados}`);
-        }
-        toast.success(dados);
+  //   const buscarUsuario = async () => {
+  //     try {
+  //       const { dados, ok } = await get('/usuario', token);
 
-        return setUsuario(dados);
-      } catch (error) {
-        return toast.error(error.message);
-      }
-    };
+  //       if (!ok) {
+  //         return toast.error(`erro${dados}`);
+  //       }
+  //       toast.success(dados);
 
-    buscarUsuario();
-    buscarRestaurantes();
-  }, [token, f5]);
+  //       return setUsuario(dados);
+  //     } catch (error) {
+  //       return toast.error(error.message);
+  //     }
+  //   };
+
+  //   buscarUsuario();
+  //   buscarRestaurantes();
+  // }, [token, f5]);
+
+  setUsuario(user);
 
   return (
     <div className="bodyRestaurantes">
@@ -78,26 +111,16 @@ export default function restaurantes() {
 
       <div className={`${lojas.length === 0 ? 'none' : 'contemRestaurantes'} flexColunm contentCenter itemsCenter mt2rem`}>
         <div className="contemBotao flexRow itemsCenter">
-          <input type="text" placeholder="Buscar" />
+          <input id="inputBusca" type="text" placeholder="Buscar" />
         </div>
 
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.map((loja) => (
-            <div className="flip-card" item key={loja.id}>
-              <div className="flip-card-inner">
-                <div className="flip-card-front">
-                  {/* <CustomCard
-                    {...loja}
-                    recarregarPag={() => setF5(true)}
-                  /> */}
-                  <div>card</div>
-                </div>
-                {/* <div className="flip-card-back">
-                  <CustomModal {...produto} recarregarPag={() => setF5(true)} />
-                  { ' ' }
-                  <RestaurantesEditar {...produto} recarregarPag={() => setF5(true)} />
-                </div> */}
-              </div>
+            <div className="provisorio">
+              <CustomCard
+                {...loja}
+                recarregarPag={() => setF5(true)}
+              />
             </div>
           ))}
         </div>
