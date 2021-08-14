@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8888';
+const BASE_URL = 'http://localhost:8001';
 
 async function postNaoAutenticado(point, data) {
   const resposta = await fetch(BASE_URL + point, {
