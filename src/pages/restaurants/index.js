@@ -58,6 +58,7 @@ export default function restaurantes() {
 
   function filtrado(loja) {
     if (filtroLojas && loja.nome.includes(filtroLojas)) return loja;
+    if (filtroLojas && loja.nome.includes(filtroLojas) === false) return toast.warn('Não foi encontrado nenhum restaurante com esse nome');
     if (!filtroLojas) return loja;
   }
 
