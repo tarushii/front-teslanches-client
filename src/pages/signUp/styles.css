@@ -1,0 +1,72 @@
+.telaRegistro {
+  height: 100vh;
+  background-image: url('../../assets/bg-register.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.telaRegistroFormulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  width: 40%;
+  height: 100vh;
+  border-radius: 0 0 0 5.5rem ;
+  background-color: #fff;
+  box-shadow: 0 .3125rem 1.5625rem rgb(146, 146, 146) ;
+}
+
+.telaRegistroFormulario header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 25rem;
+  margin-bottom: 2rem;
+}
+
+.telaRegistro main {
+  color: var(--cinzaEscuro);
+  font-weight: bold;
+}
+
+.telaRegistro main div{
+  display: flex;
+  justify-content: center;
+}
+
+.telaRegistro main div button {
+  margin-left: auto;
+  background-color: transparent;
+  color: #D13201;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.retornarLogin {
+  position: relative;
+  right: 0.5rem;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: rgb(128, 128, 128);
+}
+
+#logoRegister{
+  position: absolute;
+  top: 2.5rem;
+  left: 2.5rem;
+  z-index: 4;
+}
+
+#centroRegister{
+  position: absolute;
+  top: 200px;
+  left: 225px;
+  z-index: 4;
+}
