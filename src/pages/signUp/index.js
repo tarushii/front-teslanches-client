@@ -18,7 +18,6 @@ import imageLogo from '../../assets/logo-register.svg';
 import InputPassword from '../../components/inputPassword';
 
 export default function SingUp() {
-  const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
