@@ -4,7 +4,7 @@ import {
 import { AuthProvider } from './context/AuthContext';
 import useAuth from './hooks/useAuth';
 
-import Login from './pages/login';
+import Login from './page/login';
 // import Cadastrar from './pages/register';
 // import Restaurantes from './pages/restaurants';
 
