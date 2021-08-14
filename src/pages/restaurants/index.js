@@ -5,11 +5,11 @@ import './styles.css';
 import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import illustrationTop from '../../assets/illustration-top.svg';
-import CustomCard from '../../components/customCard';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
+import CustomCard from '../../components/customCard';
 
+import illustrationTop from '../../assets/illustration-top.svg';
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
 
@@ -50,11 +50,10 @@ export default function restaurantes() {
         return toast.error(error.message);
       }
     };
-
     buscarUsuario();
     buscarRestaurantes();
   }, [token, f5]);
-  console.log(user);
+
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
@@ -75,12 +74,10 @@ export default function restaurantes() {
       <div className="avatarRestaurante">
         {/* <UsuarioEditar {...usuario} recarregarPag={() => setF5(true)} /> */}
       </div>
-
       <div className={`${lojas.length === 0 ? 'none' : 'contemRestaurantes'} flexColunm contentCenter itemsCenter mt2rem`}>
         <div className="contemBotao flexRow itemsCenter">
           <input id="inputBusca" type="text" placeholder="Buscar" />
         </div>
-
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.map((loja) => (
             <div className="provisorio">
@@ -92,7 +89,6 @@ export default function restaurantes() {
           ))}
         </div>
       </div>
-
       <div className={`${lojas.length === 0 ? 'addRestaurantes' : 'none'} flexColunm contentCenter itemsCenter`}>
         <span>
           No momento nenhum restaurante esta ativo.

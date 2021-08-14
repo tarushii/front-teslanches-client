@@ -6,11 +6,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import illustrationCenter from '../../assets/image-login.svg';
-import InputPassword from '../../components/inputPassword';
 import { schemaLogin } from '../../validation/schema';
 import { postNaoAutenticado } from '../../services/apiClient';
 import useAuth from '../../hooks/useAuth';
+import InputPassword from '../../components/inputPassword';
+
+import illustrationCenter from '../../assets/image-login.svg';
 
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -35,9 +36,7 @@ export default function SignIn() {
         toast.error(erro, { toastId: customId });
         return;
       }
-
       logar(dados.usuario, dados.tokenUsuario);
-
       history.push('/restaurantes');
     } catch (error) {
       toast.error(error.message, { toastId: customId });
@@ -57,15 +56,12 @@ export default function SignIn() {
           <div className="flexRow mt2rem ml2rem selfStart">
             <h1>Login</h1>
           </div>
-
           <div className=" flexColunm mb1rem mt2rem">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flexColunm mb1rem">
                 <label htmlFor="email">Email</label>
                 <input id="email" type="text" {...register('email', { required: true })} />
-
               </div>
-
               <InputPassword
                 id="senha"
                 label="Senha"
@@ -85,7 +81,6 @@ export default function SignIn() {
         </div>
         <img className="vetorLogin" src={illustrationCenter} alt="vetor" />
       </div>
-
     </div>
   );
 }
