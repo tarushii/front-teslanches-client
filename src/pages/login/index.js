@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import illustrationCenter from '../../asset/image-login.svg';
+import illustrationCenter from '../../assets/image-login.svg';
 // import InputPassword from '../../components/inputPassword';
 import { schemaLogin } from '../../validacoes/schema';
 import { postNaoAutenticado } from '../../services/apiClient';
