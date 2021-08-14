@@ -1,9 +1,10 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import './styles.css';
 
 export default function CustomCard({
-  nome, descricao, preco, imagem_restaurante: imagemRestaurante
+  nome, descricao, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
 }) {
   return (
 
@@ -20,7 +21,7 @@ export default function CustomCard({
             <div className="valorBox">
               <span>
                 R$
-                {preco}
+                {valor_minimo_pedido}
               </span>
             </div>
           </Typography>

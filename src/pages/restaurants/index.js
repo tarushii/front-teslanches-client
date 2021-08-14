@@ -54,7 +54,6 @@ export default function restaurantes() {
     buscarUsuario();
     buscarRestaurantes();
   }, [token, f5]);
-  console.log(user);
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
