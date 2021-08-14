@@ -5,23 +5,20 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import './styles.css';
 import '../../styles/global.css';
-import { React, useState, useContext } from 'react';
+import { React, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
-import { postAutenticado } from '../../services/apiClient';
+import { postNaoAutenticado } from '../../services/apiClient';
 import { schemaCadastro } from '../../validation/schema';
-import AuthContext from '../../context/AuthContext';
 import imageCenter from '../../assets/img-center-register.svg';
 import imageLogo from '../../assets/logo-register.svg';
 import InputPassword from '../../components/inputPassword';
 
 export default function SingUp() {
-  const [carregando, setCarregando] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
-  const { token } = useContext(AuthContext);
   const history = useHistory();
   const toastOk = 'ok';
   const toastErro = 'erro';
@@ -32,30 +29,30 @@ export default function SingUp() {
   });
 
   async function onSubmit(data) {
-    setCarregando(true);
-    setErro('');
-
+    console.log(data);
+    const { senhaConfere, ...dadosAtualizados } = Object
+      .fromEntries(Object
+        .entries(data)
+        .filter(([, value]) => value));
+    console.log(dadosAtualizados);
     if (password !== passwordCheck) {
       return toast.error('As senhas precisam ser iguais');
     }
+
     try {
-      const { dados, ok } = await postAutenticado('/cadastro', data, token);
+      const { dados, ok } = await postNaoAutenticado('/cadastro', dadosAtualizados);
       if (!ok) {
-        setErro(dados);
         toast.error(dados, { toastId: toastErro });
         return;
       }
-
-      setCarregando(false);
+      history.push('/');
+      return toast.success('Cadastro realizado com sucesso', { toastId: toastOk });
     } catch (error) {
-      toast.error(error.message, { toastId: toastErro });
-      setErro(error.message);
+      return toast.error(error.message, { toastId: toastErro });
     }
-    history.push('/');
-    toast.success('Cadastro realizado com sucesso', { toastId: toastOk });
   }
 
-  toast.error(errors.nome?.message, { toastId: toastErro });
+  toast.error(errors.nome_usuario?.message, { toastId: toastErro });
   toast.error(errors.telefone?.message, { toastId: toastErro });
   toast.error(errors.email?.message, { toastId: toastErro });
   toast.error(errors.senha?.message, { toastId: toastErro });
@@ -67,11 +64,11 @@ export default function SingUp() {
       <img id="centroRegister" src={imageCenter} alt="imagem garota olhando celular" />
       <section className="telaRegistroFormulario">
         <main>
-          <form autoComplete={false}>
+          <form autoComplete={false} onSubmit={handleSubmit(onSubmit)}>
             <h1 className="mb1rem">Novo usuario</h1>
             <div className="flexColunm mb1rem ">
               <label htmlFor="nome">Nome</label>
-              <input id="nome" type="text" {...register('nome', { required: true })} />
+              <input id="nome_usuario" type="text" {...register('nome_usuario', { required: true })} />
             </div>
             <div className="flexColunm mb1rem ">
               <label htmlFor="email">Email</label>

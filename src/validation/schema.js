@@ -6,7 +6,7 @@ const schemaLogin = yup.object().shape({
 });
 
 const schemaCadastro = yup.object().shape({
-  nome: yup.string().required(),
+  nome_usuario: yup.string().required(),
   email: yup.string().email().required(),
   telefone: yup.number().positive().integer().required(),
   senha: yup.string().min(8).required(),
