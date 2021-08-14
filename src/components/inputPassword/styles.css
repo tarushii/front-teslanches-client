@@ -1,0 +1,10 @@
+.inputPassword{
+  position: relative;
+}
+
+.eyePassword{
+  position: absolute;
+  top: 2.8125rem;
+  right: .9375rem;
+  cursor: pointer;
+}
