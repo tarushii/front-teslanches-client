@@ -61,6 +61,7 @@ export default function restaurantes() {
     if (!filtroLojas) return loja;
   }
 
+
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
