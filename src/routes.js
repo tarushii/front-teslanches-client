@@ -4,9 +4,9 @@ import {
 import { AuthProvider } from './context/AuthContext';
 import useAuth from './hooks/useAuth';
 
-import Login from './pages/login';
-import Cadastrar from './pages/register';
-import Restaurantes from './pages/restaurants';
+import Login from './page/login';
+// import Cadastrar from './pages/register';
+// import Restaurantes from './pages/restaurants';
 
 function RotasProtegidas(props) {
   const { token } = useAuth();
@@ -17,6 +17,7 @@ function RotasProtegidas(props) {
     />
   );
 }
+
 export default function Routes() {
   return (
     <AuthProvider>
@@ -24,9 +25,9 @@ export default function Routes() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/login" component={Login} />
-          <Route path="/cadastrar" component={Cadastrar} />
+          {/* <Route path="/cadastrar" component={Cadastrar} /> */}
           <RotasProtegidas>
-            <Route path="/restaurantes" component={Restaurantes} />
+            {/* <Route path="/restaurantes" component={Restaurantes} /> */}
           </RotasProtegidas>
         </Switch>
       </Router>
