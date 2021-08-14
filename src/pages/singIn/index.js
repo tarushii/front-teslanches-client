@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import illustrationCenter from '../../assets/image-login.svg';
-// import InputPassword from '../../components/inputPassword';
+import InputPassword from '../../components/inputPassword';
 import { schemaLogin } from '../../validation/schema';
 import { postNaoAutenticado } from '../../services/apiClient';
 import useAuth from '../../hooks/useAuth';
@@ -66,27 +66,20 @@ export default function SignIn() {
 
               </div>
 
-              <div className="flexColunm mb1rem">
-                <label htmlFor="senha">Senha</label>
-                <input id="senha" type="password" {...register('senha', { required: true })} />
-
-              </div>
-
-              {/* <InputPassword
+              <InputPassword
                 id="senha"
                 label="Senha"
                 register={() => register('senha', { required: true, minLength: 8 })}
                 value={password}
                 setValue={setPassword}
-
-              /> */}
+              />
               <div className="flexRow contentCenter mt1rem mb1rem">
                 <button className="btLaranja" type="submit"> Entrar </button>
               </div>
             </form>
             <div className="flexRow contentCenter mt2rem">
               <span className="mr06rem">Ainda não tem uma conta?</span>
-              <Link to="/cadastrar">Cadastre-se</Link>
+              <Link to="/cadastro">Cadastre-se</Link>
             </div>
           </div>
         </div>
