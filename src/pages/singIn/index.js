@@ -33,7 +33,7 @@ export default function SignIn() {
 
       if (!ok) {
         setErro(dados);
-        toast.error(erro, { toastId: customId });
+        toast.error(dados, { toastId: customId });
         return;
       }
       logar(dados.usuario, dados.tokenUsuario);
