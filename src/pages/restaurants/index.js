@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -56,10 +57,29 @@ export default function restaurantes() {
     buscarRestaurantes();
   }, [token, f5]);
 
+  function toastWarn() {
+    if (filtroLojas.length > 0) {
+      toast.warn('Não foi encontrado nenhum restaurante com esse nome', { toastId: customId });
+    }
+  }
+
+  const naoTemWarn = setTimeout(toastWarn, 500);
+
+  function stopTimer() {
+    clearTimeout(naoTemWarn);
+    clearInterval(naoTemWarn);
+  }
+
   function filtrado(loja) {
-    if (filtroLojas && loja.nome.includes(filtroLojas)) return loja;
-    if (filtroLojas && loja.nome.includes(filtroLojas) === false) return toast.warn('Não foi encontrado nenhum restaurante com esse nome');
     if (!filtroLojas) return loja;
+    if (filtroLojas.length > 0 && !loja.nome.includes(filtroLojas)) {
+      // eslint-disable-next-line no-unused-expressions
+      naoTemWarn;
+    }
+    if (filtroLojas && loja.nome.includes(filtroLojas)) {
+      stopTimer();
+      return loja;
+    }
   }
 
   return (
