@@ -39,21 +39,21 @@ export default function restaurantes() {
       }
     }
 
-    const buscarUsuario = async () => {
-      try {
-        const { dados, ok } = await get('/usuario', token);
+    // const buscarUsuario = async () => {
+    //   try {
+    //     const { dados, ok } = await get('/usuario', token);
 
-        if (!ok) {
-          return toast.error(`erro${dados}`);
-        }
-        toast.success(dados);
+    //     if (!ok) {
+    //       return toast.error(`erro${dados}`);
+    //     }
+    //     toast.success(dados);
 
-        return setUsuario(dados);
-      } catch (error) {
-        return toast.error(error.message);
-      }
-    };
-    buscarUsuario();
+    //     return setUsuario(dados);
+    //   } catch (error) {
+    //     return toast.error(error.message);
+    //   }
+    // };
+    // buscarUsuario();
     buscarRestaurantes();
   }, [token, f5]);
 
