@@ -17,7 +17,7 @@ import illustrationCenter from '../../assets/image-login.svg';
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
-    reValidateMode: '',
+    reValidateMode: 'onSubmit',
     defaultValues: {},
     context: undefined,
     criteriaMode: 'firstError',

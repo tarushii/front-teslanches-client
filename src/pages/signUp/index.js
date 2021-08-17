@@ -12,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { postNaoAutenticado } from '../../services/apiClient';
 import { schemaCadastro } from '../../validation/schema';
+
 import InputPassword from '../../components/inputPassword';
 import {
   toastNome, toastEmail, toastSenha, toastSenhaConfere, toastTelefone
@@ -30,7 +31,7 @@ export default function SingUp() {
     register, handleSubmit, formState: { errors }
   } = useForm({
     mode: 'onSubmit',
-    reValidateMode: '',
+    reValidateMode: 'onSubmit',
     defaultValues: {},
     context: undefined,
     criteriaMode: 'firstError',
