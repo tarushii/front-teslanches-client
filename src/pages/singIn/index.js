@@ -10,11 +10,19 @@ import { schemaLogin } from '../../validation/schema';
 import { postNaoAutenticado } from '../../services/apiClient';
 import useAuth from '../../hooks/useAuth';
 import InputPassword from '../../components/inputPassword';
+import { toastEmail, toastSenha } from '../../validation/toastfy';
 
 import illustrationCenter from '../../assets/image-login.svg';
 
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm({
+    mode: 'onSubmit',
+    reValidateMode: '',
+    defaultValues: {},
+    context: undefined,
+    criteriaMode: 'firstError',
+    shouldFocusError: true,
+    shouldUnregister: true,
     resolver: yupResolver(schemaLogin)
   });
   const [password, setPassword] = useState('');
@@ -45,8 +53,12 @@ export default function SignIn() {
     setCarregando(false);
   }
 
-  toast.error(errors.email?.message, { toastId: customId });
-  toast.error(errors.senha?.message, { toastId: customId });
+  if (errors.email) {
+    toastEmail();
+  }
+  if (errors.senha) {
+    toastSenha();
+  }
 
   return (
     <div className="bodyLogin">
