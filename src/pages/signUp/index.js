@@ -37,6 +37,11 @@ export default function SingUp() {
     if (password !== passwordCheck) {
       return toast.error('As senhas precisam ser iguais');
     }
+    toast.error(errors.nome_usuario?.message, { toastId: toastErro });
+    toast.error(errors.telefone?.message, { toastId: toastErro });
+    toast.error(errors.email?.message, { toastId: toastErro });
+    toast.error(errors.senha?.message, { toastId: toastErro });
+    toast.error(errors.senhaConfere?.message, { toastId: toastErro });
 
     try {
       const { dados, ok } = await postNaoAutenticado('/cadastro', dadosAtualizados);
@@ -50,12 +55,6 @@ export default function SingUp() {
       return toast.error(error.message, { toastId: toastErro });
     }
   }
-
-  toast.error(errors.nome_usuario?.message, { toastId: toastErro });
-  toast.error(errors.telefone?.message, { toastId: toastErro });
-  toast.error(errors.email?.message, { toastId: toastErro });
-  toast.error(errors.senha?.message, { toastId: toastErro });
-  toast.error(errors.senhaConfere?.message, { toastId: toastErro });
 
   return (
     <article className="telaRegistro">
