@@ -12,7 +12,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 import { postNaoAutenticado } from '../../services/apiClient';
 import { schemaCadastro } from '../../validation/schema';
+
 import InputPassword from '../../components/inputPassword';
+import {
+  toastNome, toastEmail, toastSenha, toastSenhaConfere, toastTelefone
+} from '../../validation/toastfy';
 
 import imageCenter from '../../assets/img-center-register.svg';
 import imageLogo from '../../assets/logo-register.svg';
@@ -26,8 +30,31 @@ export default function SingUp() {
   const {
     register, handleSubmit, formState: { errors }
   } = useForm({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: {},
+    context: undefined,
+    criteriaMode: 'firstError',
+    shouldFocusError: true,
+    shouldUnregister: true,
     resolver: yupResolver(schemaCadastro)
   });
+
+  if (errors.nome_usuario) {
+    toastNome();
+  }
+  if (errors.email) {
+    toastEmail();
+  }
+  if (errors.telefone) {
+    toastTelefone();
+  }
+  if (errors.senha) {
+    toastSenha();
+  }
+  if (errors.senhaConfere) {
+    toastSenhaConfere();
+  }
 
   async function onSubmit(data) {
     const { senhaConfere, ...dadosAtualizados } = Object
@@ -37,11 +64,6 @@ export default function SingUp() {
     if (password !== passwordCheck) {
       return toast.error('As senhas precisam ser iguais');
     }
-    toast.error(errors.nome_usuario?.message, { toastId: toastErro });
-    toast.error(errors.telefone?.message, { toastId: toastErro });
-    toast.error(errors.email?.message, { toastId: toastErro });
-    toast.error(errors.senha?.message, { toastId: toastErro });
-    toast.error(errors.senhaConfere?.message, { toastId: toastErro });
 
     try {
       const { dados, ok } = await postNaoAutenticado('/cadastro', dadosAtualizados);
@@ -66,27 +88,27 @@ export default function SingUp() {
             <h1 className="mb1rem">Novo usuario</h1>
             <div className="flexColunm mb1rem ">
               <label htmlFor="nome">Nome</label>
-              <input id="nome_usuario" type="text" {...register('nome_usuario', { required: true })} />
+              <input id="nome_usuario" type="text" {...register('nome_usuario')} />
             </div>
             <div className="flexColunm mb1rem ">
               <label htmlFor="email">Email</label>
-              <input id="email" type="email" {...register('email', { required: true })} />
+              <input id="email" type="email" {...register('email')} />
             </div>
             <div className="flexColunm mb1rem ">
               <label htmlFor="telefone">Telefone</label>
-              <input id="telefone" type="number" placeholder="DDD 12345 1234" {...register('telefone', { required: true, minLength: 11 })} />
+              <input id="telefone" type="number" placeholder="DDD 12345 1234" defaultValue="" {...register('telefone')} />
             </div>
             <InputPassword
               id="senha"
               label="Senha"
-              register={() => register('senha', { required: true, minLength: 8 })}
+              register={() => register('senha')}
               value={password}
               setValue={setPassword}
             />
             <InputPassword
               id="senhaConfere"
               label="Repita a senha"
-              register={() => register('senhaConfere', { required: true, minLength: 8 })}
+              register={() => register('senhaConfere')}
               value={passwordCheck}
               setValue={setPasswordCheck}
             />

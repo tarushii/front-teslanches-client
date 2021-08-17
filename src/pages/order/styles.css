@@ -1,162 +1,150 @@
+*{
+  box-sizing: border-box;
+}
 .MuiDialog-paper{
   border-radius: 2rem !important;
-  padding: 2rem !important;
+  padding: 0rem !important;
+  width: 625px !important;
 }
 
-.bodyProdutosDialog{
-  width: 63rem;
-  height: 49.9125rem;
-  background: #FFFFFF;
-  box-shadow: 0px .25rem 1rem rgba(50, 50, 50, 0.4);
-  border-radius: 1rem;
+.bodyDetalheProduto{
+  width: 100%;
+  height: 820px;
+  background: #F9F9F9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 2rem;
+  overflow: hidden;
+}
+
+.conteinerFotoProduto{
+  width: 100%;
+  height: 337.16px;
   box-sizing: border-box;
+  border-radius: 2rem 2rem 0px 0px;
 }
 
-.fotoProdutosEditar{
-  position: relative;
-  margin-top: 4.6rem;
-  width: 24rem;
-  height: 24rem;
-  transform: translateY(-55px);
+#fotoProduto{
+  border-radius: 2rem 2rem 0px 0px;
+  border: 2px solid rgba(251, 59, 0, 0.2);
+  width: 625px;
+  position: absolute;
 }
 
-.acoesProdutos{
-  margin-right: 1.5rem;
-  margin-top: 1rem;
-}
-
-input#valor{
+.avatarDetalheRestaurante{
+  position: absolute;
+  top: 16rem;
+  left: 22rem;
+   background-position: center;
+  background-size: contain;
   width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  box-sizing: border-box;
+  border: #ffffff .375rem solid;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
 }
 
-.inputFile{
-  position: absolute;
-  bottom: -1.61rem;
-}
-
-input#fileEdit{
-  text-decoration: unset;
-  all: unset;
-  cursor: pointer;
-  height: 24rem;
-  width: 24rem;
-  border-radius: 1rem;
-  display: none;
-}
-
-.fileEdit{
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  cursor: pointer;  
-  border-radius: 1rem;
-  text-align: center;
-  margin-bottom: 0px;
-  z-index: 3;
-}
-
-.iconeUpload{
-  position: absolute;
-  top: 11rem;
-  left: 11rem;
-  z-index: 2;
-}
-
-.labelIconeUpload{
-  position: absolute;
-  top: 15rem;
-  left: 6rem;
-  z-index: 3;
-  width: 12.8125rem;
-  height: 2.625rem;
+.conteinerdetalhesProduto h1{
   font-style: normal;
   font-weight: 600;
-  font-size: .875rem;
+  font-size: 36px;
+  line-height: 150%;
+  color: #525459;
+}
+
+.conteinerdetalhesProduto span{
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #525459;
+}
+
+.conteinerdetalhesProduto p{
+  width: 270px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 170%;
+  color: rgba(34, 34, 34, 0.87);
+}
+
+#conteinerPreco{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 192px;
+  height: 48px;
+  background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #006335;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+}
+
+#relogioIcon{
+  width: 25px;
+  height: 25px;
+}
+#moneyIcon{
+  width: 25px;
+  height: 25px;
+}
+
+#minusIcon{
+  all: unset;
+  width: 40px;
+  height: 41px;
+  border-radius: 5px 0px 0px 5px;
+  background: #D13201;
+  fill: #ffffff;
+  cursor: pointer;
+}
+
+#plusIcon{
+  all: unset;
+  width: 40px;
+  height: 41px;
+  background: #D13201;
+  border-radius: 0px 5px 5px 0px;
+  fill: #ffffff;
+  cursor: pointer;
+}
+
+#textoQuantidade{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 100%;
+  color: #000000;
+  text-align: center;
+  margin: 0.7rem 1rem 0.2rem;
+}
+
+.boxQuantidade{
+  width: 200px
+}
+
+#btTransparenteCinza{
+  all: unset;
+  background: transparent;
+  font-weight: 600;
+  font-size: 13px;
   line-height: 150%;
   text-align: center;
-  color: #FFFFFF;
-  z-index: 2;
-}
-
-.formProdutos p{
-  position: absolute;
-  transform: translateY(3.5rem);
-}
-
-#btAddProduto{
-  transform: translateX(28.125rem);
-}
-
-.fotoCarregada{
-  height: 24rem;
-  width: 24rem;
-  z-index: 4;
-  border: 2px solid rgba(251, 59, 0, 0.2);
-  box-sizing: border-box;
-  border-radius: 1rem;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 3.25rem;
-  height: 1.6875rem;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
+  text-decoration-line: underline;
+  color: #525459;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .3s;
-  transition: .3s;
-  border: gray 1px solid;
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 1.125rem;
-  width: 1.125rem;
-  left: .25rem;
-  bottom: .25rem;
-  background-color: rgb(17, 126, 7);
-  -webkit-transition: .3s;
-  transition: .3s;
+#btAddCarrinho{
+  transform: translateY(10px);
 }
-
-input:checked + .slider {
-  background-color: #00FF2180;
-  border: green 1px solid;
-
+#plus, #minus{
+  all: unset;
 }
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #28FF57;
-  
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(1.625rem);
-  -ms-transform: translateX(1.625rem);
-  transform: translateX(1.625rem);
-}
-
-.slider.round {
-  border-radius: 2.125rem;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+#btDeAbrir{
+  transform: translateX(180px);
 }

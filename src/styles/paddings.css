@@ -62,7 +62,9 @@
 .px2rem{
   padding: 0px 2rem;
 }
-
+.px3rem{
+  padding: 0px 3rem;
+}
 .py03rem{
   padding: 0.3rem 0px;
 }
