@@ -68,6 +68,19 @@ async function del(point, token) {
   return { dados, ok: resposta.ok };
 }
 
+async function postEstadoProduto(point, token) {
+  const resposta = await fetch(BASE_URL + point, {
+    method: 'POST',
+    headers: {
+      tokenUsuario: `${token}`
+    }
+  });
+
+  const dados = await resposta.json();
+
+  return { dados, ok: resposta.ok };
+}
+
 export {
-  postNaoAutenticado, postAutenticado, get, put, del
+  postNaoAutenticado, postAutenticado, get, put, del, postEstadoProduto
 };
