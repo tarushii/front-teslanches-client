@@ -14,6 +14,7 @@ import CustomCard from '../../components/customCard';
 import illustrationTop from '../../assets/illustration-top.svg';
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
+import DetalheProduto from '../order';
 
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
@@ -82,7 +83,6 @@ export default function restaurantes() {
     }
   }
 
-
   return (
     <div className="bodyRestaurantes">
       <div className="conteinerTopo contentCenter itemsCenter">
@@ -111,6 +111,7 @@ export default function restaurantes() {
             placeholder="Buscar"
             onChange={(e) => setFiltroLojas(e.target.value)}
           />
+          <DetalheProduto />
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
