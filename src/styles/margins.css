@@ -10,7 +10,9 @@
 .mb2rem{
   margin-bottom: 2rem;
 }
-
+.mb3rem{
+  margin-bottom: 3rem;
+}
 .mt03rem{
   margin-top: 0.3rem;
 }
@@ -23,7 +25,9 @@
 .mt2rem{
   margin-top: 2rem;
 }
-
+.mt3rem{
+  margin-top: 3rem;
+}
 .ml03rem{
   margin-left: 0.3rem;
 }
@@ -36,7 +40,9 @@
 .ml2rem{
   margin-left: 2rem;
 }
-
+.ml3rem{
+  margin-left: 3rem;
+}
 .mr03rem{
   margin-right: 0.3rem;
 }
@@ -49,7 +55,9 @@
 .mr2rem{
   margin-right: 2rem;
 }
-
+.mr3rem{
+  margin-right: 3rem;
+}
 .mx03rem{
   padding: 0px 0.3rem;
 }
