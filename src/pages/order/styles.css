@@ -25,9 +25,8 @@
 
 #fotoProduto{
   border-radius: 2rem 2rem 0px 0px;
-  border: 2px solid rgba(251, 59, 0, 0.2);
-  width: 625px;
-  position: absolute;
+  border: 1px solid rgba(251, 59, 0, 0.7);
+  width: 100%;
 }
 
 .avatarDetalheRestaurante{
@@ -102,6 +101,7 @@
   background: #D13201;
   fill: #ffffff;
   cursor: pointer;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
 }
 
 #plusIcon{
@@ -112,6 +112,15 @@
   border-radius: 0px 5px 5px 0px;
   fill: #ffffff;
   cursor: pointer;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+}
+#plusIcon:hover, #minusIcon:hover {background-color: #FB3B00}
+
+#plusIcon:active, #minusIcon:active {
+  background-color: #D1320150;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  transform: translateY(4px);
+  transition: .3s;
 }
 
 #textoQuantidade{
@@ -121,6 +130,7 @@
   color: #000000;
   text-align: center;
   margin: 0.7rem 1rem 0.2rem;
+  text-shadow: 1px 1px rgb(163, 163, 163);
 }
 
 .boxQuantidade{
@@ -141,7 +151,17 @@
 
 #btAddCarrinho{
   transform: translateY(10px);
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
 }
+#btAddCarrinho:hover {background-color: #FB3B00}
+
+#btAddCarrinho:active {
+  background-color: #D1320150;
+  box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  transform: translateY(4px);
+  transition: .3s;
+}
+
 #plus, #minus{
   all: unset;
 }
