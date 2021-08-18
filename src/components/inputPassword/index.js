@@ -9,7 +9,7 @@ export default function InputPassword({
   const [mostrarSenha, setMostrarSenha] = useState(false);
 
   return (
-    <div className="flexColunm mb1rem inputPassword">
+    <div className="flexColumn mb1rem inputPassword">
       <label>{label}</label>
       <input
         type={mostrarSenha ? 'text' : 'password'}
