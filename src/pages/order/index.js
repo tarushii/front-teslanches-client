@@ -18,7 +18,17 @@ import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
 import carrinho from '../../assets/carrinho.svg';
 
-export default function DetalheProduto({ recarregarPag }) {
+export default function DetalheProduto({
+  id: idProduto,
+  nome,
+  descricao,
+  preco,
+  recarregarPag,
+  imagem_produto: temImagem,
+  valor_minimo_pedido: valorMinimo,
+  tempo_entrega_minutos: tempoMinutos,
+  taxa_entrega: taxaEntrega
+}) {
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(0);
   const [open, setOpen] = useState(false);
@@ -53,11 +63,11 @@ export default function DetalheProduto({ recarregarPag }) {
     setCarregando(true);
     setErro('');
 
-    const { ...dadosAtualizados } = Object
-      .fromEntries(Object
-        .entries(data)
-        .filter(([, value]) => value));
-
+    // const { ...dadosAtualizados } = Object
+    //   .fromEntries(Object
+    //     .entries(data)
+    //     .filter(([, value]) => value));
+    console.log(data);
     try {
       // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
       // if (!ok) {
@@ -80,9 +90,13 @@ export default function DetalheProduto({ recarregarPag }) {
       setErro(error.message);
     }
 
-    handleClose();
-    recarregarPag();
+    // handleClose();
+    // recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
+  }
+
+  function precoConvertido(valor) {
+    return (valor / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
   return (
@@ -116,25 +130,29 @@ export default function DetalheProduto({ recarregarPag }) {
             </div>
             {/* TODO - display none */}
             <div className=" conteinerdetalhesProduto px3rem">
-              <h1>Nome do produto</h1>
+              <h1>{nome}</h1>
               <div className="flexRow mt2rem contentBetween px2rem">
                 <span className="flexRow itemsCenter gap1rem">
                   <img src={iconMoney} id="iconMoney" alt="icone dinheiro" />
-                  Pedido minimo: R$ 30,00
+                  Pedido minimo:
+                  {' '}
+                  {precoConvertido(valorMinimo)}
                 </span>
                 <span className="flexRow itemsCenter gap1rem">
                   <img src={iconRelogio} id="iconRelogio" alt="icone relogio" />
-                  tempo de entrega: 1h - 1,5h
+                  tempo de entrega:
+                  {' '}
+                  {tempoMinutos}
                 </span>
               </div>
               <form>
                 <div className="flexRow mt3rem contentBetween px2rem mb3rem">
                   <p>
-                    Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit ut aliquam,
-                    purus sit amet luctus venenatis
+                    {descricao}
                   </p>
-                  <span id="conteinerPreco">$99,99</span>
+                  <span id="conteinerPreco">
+                    {precoConvertido(preco)}
+                  </span>
                 </div>
                 <div className="flexRow contentBetween itemsCenter px2rem">
                   <div className="boxQuantidade flexRow contentBetween mt2rem">
@@ -142,6 +160,10 @@ export default function DetalheProduto({ recarregarPag }) {
                     <span id="textoQuantidade">{quantidade}</span>
                     <button id="plus" type="button" onClick={() => setQuantidade(quantidade + 1)}><img id="plusIcon" src={plusIcon} alt="plus icon" /></button>
                   </div>
+
+                  {/* TODO - agora so preciso registrar quantidade + preco
+                  e enviar data pro locStorage */}
+
                   <button id="btAddCarrinho" className="btLaranja" type="submit" onClick={handleSubmit(onSubmit)}>
                     Adicionar ao Carrinho
                   </button>

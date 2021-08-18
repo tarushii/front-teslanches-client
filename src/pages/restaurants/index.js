@@ -111,6 +111,7 @@ export default function restaurantes() {
             placeholder="Buscar"
             onChange={(e) => setFiltroLojas(e.target.value)}
           />
+          {/* TODO - fazer um spread de restaurante + produto no comp DetalheProduto la na pagina do restaurante */}
           <DetalheProduto />
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
