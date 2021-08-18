@@ -39,3 +39,15 @@
   border-radius: 1.25rem;
   cursor: pointer;
 }
+
+.btCross{
+  all: unset;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 100%;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 1.25rem;
+  cursor: pointer;
+}
