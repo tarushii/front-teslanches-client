@@ -7,6 +7,7 @@ import useAuth from './hooks/useAuth';
 import SingUp from './pages/signUp';
 import SigIn from './pages/singIn';
 import Restaurantes from './pages/restaurants';
+import perfilRestaurante from './pages/restaurantProfile';
 
 function RotasProtegidas(props) {
   const { token } = useAuth();
@@ -26,9 +27,9 @@ export default function Routes() {
           <Route path="/" exact component={SigIn} />
           <Route path="/login" component={SigIn} />
           <Route path="/cadastro" component={SingUp} />
+          <Route path="/restaurantes/:id/perfil" component={perfilRestaurante} />
           <RotasProtegidas>
             <Route path="/restaurantes" component={Restaurantes} />
-            .
           </RotasProtegidas>
         </Switch>
       </Router>

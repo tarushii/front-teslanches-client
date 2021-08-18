@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import './styles.css';
 
 export default function CustomCard({
-  nome, descricao, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
+  id, nome, descricao, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
 }) {
   return (
 

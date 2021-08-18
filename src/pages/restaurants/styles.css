@@ -93,6 +93,7 @@ button.addRestaurantes{
   gap: 3rem;
   max-width: 80rem;
   height: 18.75rem;
+  cursor: pointer;
 }
 
 .contemBotao{

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -6,6 +7,7 @@ import './styles.css';
 import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
 import CustomCard from '../../components/customCard';
@@ -21,6 +23,7 @@ export default function restaurantes() {
   const [f5, setF5] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const customId = 'custom-id-yes';
+  const history = useHistory();
 
   useEffect(() => {
     setF5(false);
@@ -38,29 +41,48 @@ export default function restaurantes() {
       }
     }
 
-    const buscarUsuario = async () => {
-      try {
-        const { dados, ok } = await get('/usuario', token);
+    // const buscarUsuario = async () => {
+    //   try {
+    //     const { dados, ok } = await get('/usuario', token);
 
-        if (!ok) {
-          return toast.error(`erro${dados}`);
-        }
-        toast.success(dados);
+    //     if (!ok) {
+    //       return toast.error(`erro${dados}`);
+    //     }
+    //     toast.success(dados);
 
-        return setUsuario(dados);
-      } catch (error) {
-        return toast.error(error.message);
-      }
-    };
-    buscarUsuario();
+    //     return setUsuario(dados);
+    //   } catch (error) {
+    //     return toast.error(error.message);
+    //   }
+    // };
+    // buscarUsuario();
     buscarRestaurantes();
   }, [token, f5]);
 
-  function filtrado(loja) {
-    if (filtroLojas && loja.nome.includes(filtroLojas)) return loja;
-    if (!filtroLojas) return loja;
+  function toastWarn() {
+    if (filtroLojas.length > 0) {
+      toast.warn('Não foi encontrado nenhum restaurante com esse nome', { toastId: customId });
+    }
   }
 
+  const naoTemWarn = setTimeout(toastWarn, 500);
+
+  function stopTimer() {
+    clearTimeout(naoTemWarn);
+    clearInterval(naoTemWarn);
+  }
+
+  function filtrado(loja) {
+    if (!filtroLojas) return loja;
+    if (filtroLojas.length > 0 && !loja.nome.includes(filtroLojas)) {
+      // eslint-disable-next-line no-unused-expressions
+      naoTemWarn;
+    }
+    if (filtroLojas && loja.nome.includes(filtroLojas)) {
+      stopTimer();
+      return loja;
+    }
+  }
 
   return (
     <div className="bodyRestaurantes">
@@ -93,7 +115,8 @@ export default function restaurantes() {
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
-            <div className="provisorio">
+            <div className="provisorio" onClick={() => history.push(`/restaurantes/${loja.id}/perfil`)} aria-hidden="true">
+
               <CustomCard
                 {...loja}
                 recarregarPag={() => setF5(true)}
