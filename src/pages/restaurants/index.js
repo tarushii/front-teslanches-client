@@ -15,6 +15,7 @@ import illustrationTop from '../../assets/illustration-top.svg';
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
 import DetalheProduto from '../order';
+import Cart from '../cart';
 
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
@@ -113,6 +114,7 @@ export default function restaurantes() {
           />
           {/* TODO - fazer um spread de restaurante + produto no comp DetalheProduto la na pagina do restaurante */}
           <DetalheProduto />
+          <Cart />
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
