@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
+import './styles.css';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import './styles.css';
+import precoConvertido from '../../formatting/currency';
 
 export default function CustomCard({
   nome, descricao, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
@@ -20,8 +21,7 @@ export default function CustomCard({
           <Typography variant="subtitle1" color="textSecondary">
             <div className="valorBox">
               <span>
-                R$
-                {valor_minimo_pedido}
+                {precoConvertido(valor_minimo_pedido)}
               </span>
             </div>
           </Typography>

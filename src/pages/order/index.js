@@ -1,17 +1,18 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import '../../styles/global.css';
+import './styles.css';
 import Dialog from '@material-ui/core/Dialog';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import useStyles from './styles';
+import { postEstadoProduto, put } from '../../services/apiClient';
+import precoConvertido from '../../formatting/currency';
+
 import minusIcon from '../../assets/minusIcon.svg';
 import plusIcon from '../../assets/plusIcon.svg';
-import { postEstadoProduto, put } from '../../services/apiClient';
-import useStyles from './styles';
-import '../../styles/global.css';
-import './styles.css';
-
 import avatarRestaurante from '../../assets/avatar-padrao.gif'; // TODO - vir do back
 import fotoProduto from '../../assets/imageProduto.svg'; // TODO - vir do back
 import iconRelogio from '../../assets/relogio.svg';
@@ -93,10 +94,6 @@ export default function DetalheProduto({
     // handleClose();
     // recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
-  }
-
-  function precoConvertido(valor) {
-    return (valor / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
   return (
