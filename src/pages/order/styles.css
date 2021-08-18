@@ -4,28 +4,28 @@
 .MuiDialog-paper{
   border-radius: 2rem !important;
   padding: 0rem !important;
-  width: 625px !important;
+  width: 39.0625rem !important;
 }
 
 .bodyDetalheProduto{
   width: 100%;
-  height: 820px;
+  height: 51.25rem;
   background: #F9F9F9;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px .25rem .625rem rgba(0, 0, 0, 0.05);
   border-radius: 2rem;
   overflow: hidden;
 }
 
 .conteinerFotoProduto{
   width: 100%;
-  height: 337.16px;
+  height: 21.0725rem;
   box-sizing: border-box;
   border-radius: 2rem 2rem 0px 0px;
 }
 
 #fotoProduto{
   border-radius: 2rem 2rem 0px 0px;
-  border: 1px solid rgba(251, 59, 0, 0.7);
+  border: .0625rem solid rgba(251, 59, 0, 0.7);
   width: 100%;
 }
 
@@ -46,23 +46,24 @@
 .conteinerdetalhesProduto h1{
   font-style: normal;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 150%;
   color: #525459;
+  text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
 
 .conteinerdetalhesProduto span{
   font-weight: 600;
-  font-size: 14px;
+  font-size: .875rem;
   line-height: 150%;
   color: #525459;
 }
 
 .conteinerdetalhesProduto p{
-  width: 270px;
+  width: 16.875rem;
   font-style: normal;
   font-weight: normal;
-  font-size: 14px;
+  font-size: .875rem;
   line-height: 170%;
   color: rgba(34, 34, 34, 0.87);
 }
@@ -71,61 +72,66 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 192px;
-  height: 48px;
+  width: 12rem;
+  height: 3rem;
   background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;
-  border-radius: 4px;
+  border-radius: .25rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #006335;
   font-style: normal;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 100%;
 }
 
 #relogioIcon{
-  width: 25px;
-  height: 25px;
+  width: 1.5625rem;
+  height: 1.5625rem;
 }
 #moneyIcon{
-  width: 25px;
-  height: 25px;
+  width: 1.5625rem;
+  height: 1.5625rem;
 }
 
 #minusIcon{
   all: unset;
-  width: 40px;
-  height: 41px;
-  border-radius: 5px 0px 0px 5px;
+  width: 2.5rem;
+  height: 2.5625rem;
+  border-radius: .3125rem 0px 0px .3125rem;
   background: #D13201;
   fill: #ffffff;
   cursor: pointer;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  transition-duration: 0.3s;
 }
 
 #plusIcon{
   all: unset;
-  width: 40px;
-  height: 41px;
+  width: 2.5rem;
+  height: 2.5625rem;
   background: #D13201;
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 0px .3125rem .3125rem 0px;
   fill: #ffffff;
   cursor: pointer;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  transition-duration: 0.3s;
 }
-#plusIcon:hover, #minusIcon:hover {background-color: #FB3B00}
+#plusIcon:hover, #minusIcon:hover {
+  background-color: #FB3B00;
+  transition-duration: 0.3s;
+}
 
 #plusIcon:active, #minusIcon:active {
   background-color: #D1320150;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
-  transform: translateY(4px);
+  transform: translateY(.25rem);
   transition: .3s;
 }
 
 #textoQuantidade{
   font-weight: 600;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 100%;
   color: #000000;
   text-align: center;
@@ -141,7 +147,7 @@
   all: unset;
   background: transparent;
   font-weight: 600;
-  font-size: 13px;
+  font-size: .8125rem;
   line-height: 150%;
   text-align: center;
   text-decoration-line: underline;
@@ -150,15 +156,19 @@
 }
 
 #btAddCarrinho{
-  transform: translateY(10px);
+  transform: translateY(.625rem);
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
+  transition-duration: 0.3s;
 }
-#btAddCarrinho:hover {background-color: #FB3B00}
+#btAddCarrinho:hover {
+  transition-duration: 0.3s;
+  background-color: #FB3B00
+}
 
 #btAddCarrinho:active {
   background-color: #D1320150;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
-  transform: translateY(4px);
+  transform: translateY(.25rem);
   transition: .3s;
 }
 
@@ -166,5 +176,18 @@
   all: unset;
 }
 #btDeAbrir{
-  transform: translateX(180px);
+  transform: translateX(11.25rem
+);
+}
+
+.produtoAdicionadoCarrinho{
+  width: 37.5rem;
+  height: 15.625rem;
+}
+
+.btCross{
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  text-shadow: 0px 0px .375rem rgba(255,255,255,0.7);
 }
