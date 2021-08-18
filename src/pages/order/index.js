@@ -16,6 +16,7 @@ import avatarRestaurante from '../../assets/avatar-padrao.gif'; // TODO - vir do
 import fotoProduto from '../../assets/imageProduto.svg'; // TODO - vir do back
 import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
+import carrinho from '../../assets/carrinho.svg';
 
 export default function DetalheProduto({ recarregarPag }) {
   const [erro, setErro] = useState('');
@@ -104,8 +105,17 @@ export default function DetalheProduto({ recarregarPag }) {
             <div className="conteinerFotoProduto posRelative mb3rem">
               <img id="fotoProduto" src={fotoProduto} alt="foto do produto" className="fotoProduto" />
               <img className="avatarDetalheRestaurante" src={avatarRestaurante} alt="avatar do restaurante" />
+              <button className="btCross" type="button" onClick={handleClose}>
+                &times;
+              </button>
             </div>
-            <div className="conteinerdetalhesProduto px3rem">
+            {/* TODO - display none */}
+            <div className="none produtoAdicionadoCarrinho flexColumn contentCenter itemsCenter">
+              <img src={carrinho} alt="foto carrinho" />
+              <p>Pedido adicionado!</p>
+            </div>
+            {/* TODO - display none */}
+            <div className=" conteinerdetalhesProduto px3rem">
               <h1>Nome do produto</h1>
               <div className="flexRow mt2rem contentBetween px2rem">
                 <span className="flexRow itemsCenter gap1rem">
@@ -136,10 +146,10 @@ export default function DetalheProduto({ recarregarPag }) {
                     Adicionar ao Carrinho
                   </button>
                 </div>
-                <div className="flexRow contentCenter mt1rem">
-                  <button id="btTransparenteCinza" type="submit">Ir para a revisão do pedido</button>
-                </div>
               </form>
+            </div>
+            <div className="flexRow contentCenter mt1rem">
+              <button id="btTransparenteCinza" type="submit">Ir para a revisão do pedido</button>
             </div>
           </div>
         </div>

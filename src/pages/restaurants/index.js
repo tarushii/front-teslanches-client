@@ -103,7 +103,7 @@ export default function restaurantes() {
       <div className="avatarRestaurante">
         {/* <UsuarioEditar {...usuario} recarregarPag={() => setF5(true)} /> */}
       </div>
-      <div className={`${lojas.length === 0 ? 'none' : 'contemRestaurantes'} flexColunm contentCenter itemsCenter mt2rem`}>
+      <div className={`${lojas.length === 0 ? 'none' : 'contemRestaurantes'} flexColumn contentCenter itemsCenter mt2rem`}>
         <div className="contemBotao flexRow itemsCenter">
           <input
             id="inputBusca"
@@ -124,7 +124,7 @@ export default function restaurantes() {
           ))}
         </div>
       </div>
-      <div className={`${lojas.length === 0 ? 'addRestaurantes' : 'none'} flexColunm contentCenter itemsCenter`}>
+      <div className={`${lojas.length === 0 ? 'addRestaurantes' : 'none'} flexColumn contentCenter itemsCenter`}>
         <span>
           No momento nenhum restaurante esta ativo.
           <br />

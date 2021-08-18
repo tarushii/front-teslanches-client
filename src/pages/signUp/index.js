@@ -86,15 +86,15 @@ export default function SingUp() {
         <main>
           <form autoComplete={false} onSubmit={handleSubmit(onSubmit)}>
             <h1 className="mb1rem">Novo usuario</h1>
-            <div className="flexColunm mb1rem ">
+            <div className="flexColumn mb1rem ">
               <label htmlFor="nome">Nome</label>
               <input id="nome_usuario" type="text" {...register('nome_usuario')} />
             </div>
-            <div className="flexColunm mb1rem ">
+            <div className="flexColumn mb1rem ">
               <label htmlFor="email">Email</label>
               <input id="email" type="email" {...register('email')} />
             </div>
-            <div className="flexColunm mb1rem ">
+            <div className="flexColumn mb1rem ">
               <label htmlFor="telefone">Telefone</label>
               <input id="telefone" type="number" placeholder="DDD 12345 1234" defaultValue="" {...register('telefone')} />
             </div>
