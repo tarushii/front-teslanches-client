@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import precoConvertido from '../../formatting/currency';
 
 export default function CustomCard({
-  nome, descricao, quantidade, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
+  id, nome, descricao, quantidade, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
 }) {
   return (
 
