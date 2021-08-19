@@ -12,6 +12,7 @@ import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 
 import carrinho from '../../assets/carrinho.svg';
+import CustomCard from '../../components/customCard';
 
 export default function Cart({
   id: idProduto,
@@ -150,10 +151,11 @@ export default function Cart({
             {/* TODO - display none */}
             <div className=" conteinerDetalhesProduto px3rem">
 
-              <div className="cardsProdutos flexRow mt2rem contentCenter px2rem">
+              <div className="cardsProdutos flexColumn gap1rem mt2rem contentCenter px2rem">
                 { produtos.map((produto) => (
-                  <div className="cardCart">
-                    <card
+                  <div className="cardCart ">
+                    <CustomCard
+                      id="miniCard"
                       {...produto}
                       unidades={quantidade}
                       verificaAtivo="tem que por"
@@ -162,8 +164,7 @@ export default function Cart({
                 ))}
               </div>
               <div className="flexRow mt3rem contentCenter px2rem mb3rem">
-
-                <button id="btTransparenteCinza" type="submit">Ir para a revisão do pedido</button>
+                <button id="btTransparenteCinza" type="button" onClick={handleClose}>Adicionar mais itens ao pedido</button>
               </div>
               <div className="lineSpace" />
               <form>

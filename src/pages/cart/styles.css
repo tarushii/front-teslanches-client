@@ -62,7 +62,7 @@
 }
 
 #btConfirmaPedido{
-  transform: translateY(.625rem);
+  transform: translateY(-1.5rem);
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
   transition-duration: 0.3s;
 }
@@ -111,14 +111,57 @@
   margin-left: 3rem;
 }
 
-.cardCart{
-  width: 21.625rem;
-  height: 5.125rem;
-}
-
 .conteinerFaltaEndereco{
   width: 30.625rem;
   height: 2.75rem;
   background: rgba(251, 59, 0, 0.2);
   border-radius: .3125rem;
+}
+
+.cardCart .card{
+  width: 21.625rem;
+  height: 5.125rem;
+}
+.cardCart .card img{
+  width: 4.8125rem;
+  height: 4.8125rem;
+  transform: translateX(-15.3rem);
+}
+
+.cardCart .card h1,
+.cardCart .card p,
+.cardCart .card .valorBox{
+  transform: translateX(5rem);
+}
+
+.cardCart .card h1{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 150%;
+  color: #525459;
+}
+
+.cardCart .card p{
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  color: #525459;
+  margin-top: 0;
+}
+
+.cardCart .card .valorBox{
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #006335;
+  margin-top: .3rem;
+}
+
+.cardCart .card .campoDescricao{
+  display: none;
 }
