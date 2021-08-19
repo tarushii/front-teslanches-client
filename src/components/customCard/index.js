@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import precoConvertido from '../../formatting/currency';
 
 export default function CustomCard({
-  nome, descricao, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
+  nome, descricao, quantidade, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
 }) {
   return (
 
@@ -16,7 +16,9 @@ export default function CustomCard({
             <h1>{nome}</h1>
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            <p>{descricao}</p>
+            <p className="campoDescricao">{ descricao }</p>
+            <p className="campoQuantidade">{quantidade && `${quantidade} ${quantidade === 1 ? 'unidade' : 'unidades'}` }</p>
+
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             <div className="valorBox">
