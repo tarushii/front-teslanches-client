@@ -21,6 +21,9 @@ import Japonesa from '../../assets/bg-Japonesa.png';
 import Mexicano from '../../assets/bg-Mexicano.png';
 import Brasileira from '../../assets/bg-Brasileira.png';
 import Lanches from '../../assets/bg-Lanches.png';
+import iconMoney from '../../assets/coinIcon.svg';
+import iconTime from '../../assets/timeIcon.svg';
+import emptyStore from '../../assets/emptyStore.svg';
 
 export default function produtos() {
   const { user, token, deslogar } = useAuth();
@@ -104,11 +107,33 @@ export default function produtos() {
       </div>
       <img className="vetorProdutos" src={illustrationTop} alt="vetor" />
       <img src={restaurante.imagem_restaurante} alt="avatarRestaurante" className="avatarRestaurante" />
+      <div className="contemBotao flexRow itemsCenter botaoCarrinho">
+        <button type="submit" className="btLaranja"> Revisar Pedido</button>
+      </div>
+      <div className="icons">
+        <div className="icons1">
+          <h3>
+            <img src={iconMoney} alt="Icone de dinheiro" />
+
+            <span>Pedido Minimo: </span>
+            $
+            {restaurante.valor_minimo_pedido}
+          </h3>
+        </div>
+        <div>
+          <h3>
+            <img src={iconTime} alt="Icone de tempo" />
+
+            <span>Tempo de Entrega: </span>
+
+            {restaurante.tempo_entrega_minutos}
+            {' '}
+            minutos, aproximadamente
+          </h3>
+        </div>
+      </div>
 
       <div className={`${prod.length === 0 ? 'none' : 'contemProdutos'} flexColunm contentCenter itemsCenter mt2rem`}>
-        <div className="contemBotao flexRow itemsCenter">
-          <button type="submit" className="btLaranja"> Revisar Pedido</button>
-        </div>
 
         <div className="conteinerCardapio flexRow gap2rem">
           { prod.map((produto) => (
@@ -125,11 +150,10 @@ export default function produtos() {
       </div>
 
       <div className={`${prod.length === 0 ? 'addProdutos' : 'none'} flexColunm contentCenter itemsCenter`}>
-        <span>
-          Você ainda não tem nenhum produto no seu cardápio.
-          <br />
-          Gostaria de adicionar um novo produto?
-        </span>
+        <div className="retangulo">
+          <img src={emptyStore} alt="Loja sem produtos disponiveis" />
+          <span> Desculpe, estamos sem procutos ativos </span>
+        </div>
       </div>
     </div>
   );

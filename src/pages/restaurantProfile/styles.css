@@ -150,3 +150,39 @@
   .flip-card-back button{
     z-index: 4;
   }
+
+  .icons{
+    display: flex;
+    flex-direction: row;
+    margin-left: 27rem;
+    margin-top: -8rem;
+    margin-bottom: 4rem;
+    font-size: 0.875rem;
+  }
+  .icons .icons1{
+    margin-right: 2rem;
+  }
+
+  .icons img {
+    margin-right: 0.4rem;
+  }
+
+  .botaoCarrinho{
+    margin-left: 35rem;
+    margin-top: 4.3rem;
+  }
+
+  .retangulo{
+    margin-top:-8rem;
+    display: flex;
+    flex-direction: column;
+    background: #F9F9F9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+   padding: 14rem;
+  }
+
+  .retangulo span{
+    font-size: 1.25rem;
+    margin-top: 2rem;
+  }
