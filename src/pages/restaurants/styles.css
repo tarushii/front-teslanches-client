@@ -171,3 +171,7 @@ button.addRestaurantes{
   padding: .2rem 1.5rem;
   color: rgba(7, 13, 27, 0.7);
 }
+
+.conteinerCardapio .campoQuantidade{
+  display: none;
+}
