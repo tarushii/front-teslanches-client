@@ -7,6 +7,7 @@ import './styles.css';
 import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
 import CustomCard from '../../components/customCard';
@@ -24,6 +25,7 @@ export default function restaurantes() {
   const [f5, setF5] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const customId = 'custom-id-yes';
+  const history = useHistory();
 
   useEffect(() => {
     setF5(false);
@@ -118,7 +120,8 @@ export default function restaurantes() {
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
-            <div className="provisorio">
+            <div className="provisorio" onClick={() => history.push(`/restaurantes/${loja.id}/perfil`)} aria-hidden="true">
+
               <CustomCard
                 {...loja}
                 recarregarPag={() => setF5(true)}
