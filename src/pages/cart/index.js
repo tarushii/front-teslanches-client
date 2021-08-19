@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -13,6 +14,8 @@ import precoConvertido from '../../formatting/currency';
 
 import carrinho from '../../assets/carrinho.svg';
 import CustomCard from '../../components/customCard';
+import iconeConfirma from '../../assets/iconeConfirma.svg';
+import iconeSemPedido from '../../assets/semPedidos.svg';
 
 export default function Cart({
   id: idProduto,
@@ -30,6 +33,7 @@ export default function Cart({
   const [addCarrinho, setAddCarrinho] = useState([]);
   const [subtotal, setSubtotal] = useState([]);
   const [open, setOpen] = useState(false);
+  // const [pedidoEnviado, setPedidoEnviado] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
   const customId = 'custom-id-yes';
@@ -87,7 +91,7 @@ export default function Cart({
       toast.error(error.message);
       setErro(error.message);
     }
-
+    // setPedidoEnviado(true);
     // handleClose();
     // recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
@@ -107,6 +111,7 @@ export default function Cart({
   ];
 
   const endereco = '';
+  const pedidoEnviado = true;
 
   return (
     <div onClick={(e) => stop(e)} className={classes.container}>
@@ -132,64 +137,85 @@ export default function Cart({
                 &times;
               </button>
             </div>
-            <div className={`${endereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
-              <span>
-                {endereco}
-              </span>
-            </div>
-            <div className={`${endereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
-              <button className="btTransparente" type="button">Adicionar Endereço</button>
-            </div>
-            <h4>
-              Tempo de Entrega:
-              { tempoMinutos }
-            </h4>
-            {/* TODO - display none */}
-            <div className="none produtoNoCarrinho flexColumn contentCenter itemsCenter">
-              <p>Pedido adicionado!</p>
-            </div>
-            {/* TODO - display none */}
-            <div className=" conteinerDetalhesProduto px3rem">
+            <div className={`${pedidoEnviado ? 'none' : 'midCart'}`}>
+              <div className={`${endereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
+                <span>
+                  {endereco}
+                </span>
+              </div>
+              <div className={`${endereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
+                <button className="btTransparente" type="button">Adicionar Endereço</button>
+              </div>
+              <h4>
+                Tempo de Entrega:
+                { tempoMinutos }
+              </h4>
+              {/* TODO - display none */}
+              <div className="none produtoNoCarrinho flexColumn contentCenter itemsCenter">
+                <p>Pedido adicionado!</p>
+              </div>
+              {/* TODO - display none */}
+              <div className=" conteinerDetalhesProduto px3rem">
 
-              <div className="cardsProdutos flexColumn gap1rem mt2rem contentCenter px2rem">
-                { produtos.map((produto) => (
-                  <div className="cardCart ">
-                    <CustomCard
-                      id="miniCard"
-                      {...produto}
-                      unidades={quantidade}
-                      verificaAtivo="tem que por"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="flexRow mt3rem contentCenter px2rem mb3rem">
-                <button id="btTransparenteCinza" type="button" onClick={handleClose}>Adicionar mais itens ao pedido</button>
-              </div>
-              <div className="lineSpace" />
-              <form>
-                <div className="flexColumn contentCenter px2rem">
-                  <div className="subTotal flexRow contentBetween mb06rem">
-                    <span>Subtotal</span>
-                    <span>{precoConvertido(subtotal)}</span>
-                  </div>
-                  <div className="taxaEntrega flexRow contentBetween mb1rem">
-                    <span>Taxa de entrega</span>
-                    <span>{precoConvertido(taxaEntrega)}</span>
-                  </div>
-                  <div className="total flexRow contentBetween mb06rem">
-                    <span>Total</span>
-                    <h2>{precoConvertido(subtotal + taxaEntrega)}</h2>
-                  </div>
-                  <div className="flexRow contentCenter itemsCenter">
-                    <button id="btConfirmaPedido" className="btLaranja" type="submit" onClick={handleSubmit(onSubmit)}>
-                      Confirmar pedido
-                    </button>
-                  </div>
+                <div className="cardsProdutos flexColumn gap1rem mt2rem contentCenter px2rem">
+                  { produtos.map((produto) => (
+                    <div className="cardCart ">
+                      <CustomCard
+                        id="miniCard"
+                        {...produto}
+                        unidades={quantidade}
+                        verificaAtivo="tem que por"
+                      />
+                    </div>
+                  ))}
                 </div>
-              </form>
+                <div className="flexRow mt3rem contentCenter px2rem mb3rem">
+                  <button id="btTransparenteCinza" type="button" onClick={handleClose}>Adicionar mais itens ao pedido</button>
+                </div>
+                <div className="lineSpace" />
+                <form>
+                  <div className="flexColumn contentCenter px2rem">
+                    <div className="subTotal flexRow contentBetween mb06rem">
+                      <span>Subtotal</span>
+                      <span>{precoConvertido(subtotal)}</span>
+                    </div>
+                    <div className="taxaEntrega flexRow contentBetween mb1rem">
+                      <span>Taxa de entrega</span>
+                      <span>{precoConvertido(taxaEntrega)}</span>
+                    </div>
+                    <div className="total flexRow contentBetween mb06rem">
+                      <span>Total</span>
+                      <h2>{precoConvertido(subtotal + taxaEntrega)}</h2>
+                    </div>
+                    <div className="flexRow contentCenter itemsCenter">
+                      <button id="btConfirmaPedido" className="btLaranja" type="submit" onClick={handleSubmit(onSubmit)}>
+                        Confirmar pedido
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
-            <div className="flexRow contentCenter mt1rem" />
+            {/* <div className={`${pedidoEnviado ? 'pedidoEnviado' : 'none'} flexColumn contentCenter itemsCenter mt1rem`}>
+              <img id="iconConfirma" src={iconeConfirma} alt="foto de ok" />
+              <p>
+                Pedido Confirmado!
+                <br />
+                Agora é só aguardar o seu pedido
+              </p>
+              <button className="btLaranja" type="button" onClick={handleClose}>
+                Voltar para cardápio
+              </button>
+            </div> */}
+            <div className={`${pedidoEnviado ? 'semPedidos' : 'none'} flexColumn contentCenter itemsCenter mt1rem px3rem`}>
+              <p>
+                <span>Endereço de Entrega:</span>
+                {' '}
+                Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021
+              </p>
+              <img id="iconSemPedidos" src={iconeSemPedido} alt="foto de ok" />
+
+            </div>
           </div>
         </div>
       </Dialog>
