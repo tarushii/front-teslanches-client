@@ -10,7 +10,6 @@ import { useForm } from 'react-hook-form';
 import useStyles from './styles';
 import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
-import useAuth from '../../hooks/useAuth';
 
 import minusIcon from '../../assets/minusIcon.svg';
 import plusIcon from '../../assets/plusIcon.svg';
@@ -32,7 +31,6 @@ export default function PedidoProduto({
 }) {
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(1);
-  const { cart } = useAuth();
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
