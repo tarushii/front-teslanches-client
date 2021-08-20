@@ -6,9 +6,12 @@ import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
-import illustrationTop from '../../assets/illustration-top.svg';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
+import PedidoProduto from '../order';
+import Cart from '../cart';
+
+import illustrationTop from '../../assets/illustration-top.svg';
 import CustomCard from '../../components/customCard';
 import Diversos from '../../assets/bg-Diversos.png';
 import Pizzaria from '../../assets/bg-Pizzaria.png';
@@ -26,10 +29,12 @@ import iconTime from '../../assets/timeIcon.svg';
 import emptyStore from '../../assets/emptyStore.svg';
 
 export default function produtos() {
+  const { log } = console;
   const { user, token, deslogar } = useAuth();
   const [prod, setProd] = useState([]);
   const [f5, setF5] = useState(false);
   const [restaurante, setRestaurante] = useState([]);
+  const [carrinho, setCarrinho] = useState([]);
   const customId = 'custom-id-yes';
   const { id } = useParams();
   useEffect(() => {
@@ -66,6 +71,26 @@ export default function produtos() {
     buscarUsuario();
     buscarProdutos();
   }, [token, f5]);
+
+  function handleCarrinho(produto) {
+    const novoCarrinho = [...carrinho];
+    const temNoCarrinho = novoCarrinho.find((item) => item.nome === produto.nome);
+
+    if (temNoCarrinho) {
+      temNoCarrinho.quantidade += 1;
+      setCarrinho(novoCarrinho);
+      return;
+    }
+    setCarrinho([...novoCarrinho, {
+      nome: produto.nome,
+      preco: produto.preco,
+      quantidade: produto.quantidade,
+      imagem: produto.imagem,
+    }]);
+  }
+  // log(prod);
+  // log(restaurante);
+  log(carrinho);
 
   const categoriaStyle = () => {
     const categoria = restaurante.categoria_id;
@@ -108,7 +133,7 @@ export default function produtos() {
       <img className="vetorProdutos" src={illustrationTop} alt="vetor" />
       <img src={restaurante.imagem_restaurante} alt="avatarRestaurante" className="avatarRestaurante" />
       <div className="contemBotao flexRow itemsCenter botaoCarrinho">
-        <button type="submit" className="btLaranja"> Revisar Pedido</button>
+        <Cart />
       </div>
       <div className="icons">
         <div className="icons1">
@@ -132,23 +157,20 @@ export default function produtos() {
           </h3>
         </div>
       </div>
-
       <div className={`${prod.length === 0 ? 'none' : 'contemProdutos'} flexColunm contentCenter itemsCenter mt2rem`}>
 
         <div className="conteinerCardapio flexRow gap2rem">
           { prod.map((produto) => (
-
-            <div className="provisorio">
+            <div className="provisorio" aria-hidden="true">
               <CustomCard
                 {...produto}
                 recarregarPag={() => setF5(true)}
               />
+              <PedidoProduto {...restaurante} {...produto} handleCarrinho={handleCarrinho} />
             </div>
-
           ))}
         </div>
       </div>
-
       <div className={`${prod.length === 0 ? 'addProdutos' : 'none'} flexColunm contentCenter itemsCenter`}>
         <div className="retangulo">
           <img src={emptyStore} alt="Loja sem produtos disponiveis" />

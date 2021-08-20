@@ -176,8 +176,14 @@
   all: unset;
 }
 #btDeAbrir{
-  transform: translateX(11.25rem
-);
+  position: absolute;
+border: none;
+  width: 31.8rem;
+  background: transparent;
+  border-radius: 1.5rem;
+  padding-top: 13rem;
+  z-index: 5;
+  transform: translate(0rem, 1rem);
 }
 
 .produtoAdicionadoCarrinho{

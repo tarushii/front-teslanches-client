@@ -13,25 +13,24 @@ import precoConvertido from '../../formatting/currency';
 
 import minusIcon from '../../assets/minusIcon.svg';
 import plusIcon from '../../assets/plusIcon.svg';
-import avatarRestaurante from '../../assets/avatar-padrao.gif'; // TODO - vir do back
-import fotoProduto from '../../assets/imageProduto.svg'; // TODO - vir do back
 import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
 import carrinho from '../../assets/carrinho.svg';
 
-export default function DetalheProduto({
-  id: idProduto,
+export default function PedidoProduto({
   nome,
   descricao,
   preco,
   recarregarPag,
-  imagem_produto: temImagem,
+  handleCarrinho,
+  imagem_produto: produtoImagem,
   valor_minimo_pedido: valorMinimo,
   tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega
+  taxa_entrega: taxaEntrega,
+  imagem_restaurante: avatarRestaurante
 }) {
   const [erro, setErro] = useState('');
-  const [quantidade, setQuantidade] = useState(0);
+  const [quantidade, setQuantidade] = useState(1);
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
@@ -64,11 +63,18 @@ export default function DetalheProduto({
     setCarregando(true);
     setErro('');
 
-    // const { ...dadosAtualizados } = Object
-    //   .fromEntries(Object
-    //     .entries(data)
-    //     .filter(([, value]) => value));
-    console.log(data);
+    const { ...dadosAtualizados } = Object
+      .fromEntries(Object
+        .entries(data)
+        .filter(([, value]) => value));
+
+    dadosAtualizados.quantidade = quantidade;
+    dadosAtualizados.nome = nome;
+    dadosAtualizados.preco = preco;
+    dadosAtualizados.imagem = produtoImagem;
+
+    console.log(dadosAtualizados);
+    handleCarrinho(dadosAtualizados);
     try {
       // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
       // if (!ok) {
@@ -114,7 +120,7 @@ export default function DetalheProduto({
         <div className="flexColumn">
           <div className="bodyDetalheProduto flexColumn gap3rem ">
             <div className="conteinerFotoProduto posRelative mb3rem">
-              <img id="fotoProduto" src={fotoProduto} alt="foto do produto" className="fotoProduto" />
+              <img id="fotoProduto" src={produtoImagem} alt="foto do produto" className="fotoProduto" />
               <img className="avatarDetalheRestaurante" src={avatarRestaurante} alt="avatar do restaurante" />
               <button className="btCross" type="button" onClick={handleClose}>
                 &times;
