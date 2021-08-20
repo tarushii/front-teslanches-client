@@ -35,8 +35,10 @@ export default function produtos() {
   const [f5, setF5] = useState(false);
   const [restaurante, setRestaurante] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
+  const [subTotal, setSubTotal] = useState(0);
   const customId = 'custom-id-yes';
   const { id } = useParams();
+
   useEffect(() => {
     setF5(false);
     async function buscarProdutos() {
@@ -76,8 +78,14 @@ export default function produtos() {
     const novoCarrinho = [...carrinho];
     const temNoCarrinho = novoCarrinho.find((item) => item.nome === produto.nome);
 
+    setSubTotal(subTotal + produto.preco * produto.quantidade);
+
     if (temNoCarrinho) {
-      temNoCarrinho.quantidade += 1;
+      temNoCarrinho.quantidade = produto.quantidade;
+      if (produto.quantidade === 0) {
+        setCarrinho(novoCarrinho.filter((item) => item.nome !== produto.nome));
+        return;
+      }
       setCarrinho(novoCarrinho);
       return;
     }
@@ -88,9 +96,6 @@ export default function produtos() {
       imagem: produto.imagem,
     }]);
   }
-  // log(prod);
-  // log(restaurante);
-  log(carrinho);
 
   const categoriaStyle = () => {
     const categoria = restaurante.categoria_id;
@@ -133,7 +138,7 @@ export default function produtos() {
       <img className="vetorProdutos" src={illustrationTop} alt="vetor" />
       <img src={restaurante.imagem_restaurante} alt="avatarRestaurante" className="avatarRestaurante" />
       <div className="contemBotao flexRow itemsCenter botaoCarrinho">
-        <Cart />
+        <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} />
       </div>
       <div className="icons">
         <div className="icons1">
@@ -161,7 +166,7 @@ export default function produtos() {
 
         <div className="conteinerCardapio flexRow gap2rem">
           { prod.map((produto) => (
-            <div className="provisorio" aria-hidden="true">
+            <div className="boxCardRestauranteProfile" aria-hidden="true">
               <CustomCard
                 {...produto}
                 recarregarPag={() => setF5(true)}
