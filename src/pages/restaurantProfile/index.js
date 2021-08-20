@@ -157,7 +157,6 @@ export default function produtos() {
           </h3>
         </div>
       </div>
-
       <div className={`${prod.length === 0 ? 'none' : 'contemProdutos'} flexColunm contentCenter itemsCenter mt2rem`}>
 
         <div className="conteinerCardapio flexRow gap2rem">
@@ -172,7 +171,6 @@ export default function produtos() {
           ))}
         </div>
       </div>
-
       <div className={`${prod.length === 0 ? 'addProdutos' : 'none'} flexColunm contentCenter itemsCenter`}>
         <div className="retangulo">
           <img src={emptyStore} alt="Loja sem produtos disponiveis" />
