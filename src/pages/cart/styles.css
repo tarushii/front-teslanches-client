@@ -81,9 +81,7 @@
 #plus, #minus{
   all: unset;
 }
-#btCart{
-  transform: translateY(4.25rem
-);
+#btOpenCart{
 }
 
 #btCrossCart{

@@ -116,12 +116,12 @@ export default function Cart({
   return (
     <div onClick={(e) => stop(e)} className={classes.container}>
       <button
-        id="btCart"
+        id="btOpenCart"
         type="button"
         className="btLaranja mt2rem"
         onClick={handleClickOpen}
       >
-        Carrinho
+        Revisar Pedido
       </button>
       <Dialog
         open={open}
