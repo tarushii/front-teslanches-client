@@ -15,7 +15,7 @@ import minusIcon from '../../assets/minusIcon.svg';
 import plusIcon from '../../assets/plusIcon.svg';
 import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
-import carrinho from '../../assets/carrinho.svg';
+import iconeCarrinho from '../../assets/carrinho.svg';
 
 export default function PedidoProduto({
   nome,
@@ -128,7 +128,7 @@ export default function PedidoProduto({
             </div>
             {/* TODO - display none */}
             <div className="none produtoAdicionadoCarrinho flexColumn contentCenter itemsCenter">
-              <img src={carrinho} alt="foto carrinho" />
+              <img src={iconeCarrinho} alt="foto carrinho" />
               <p>Pedido adicionado!</p>
             </div>
             {/* TODO - display none */}
