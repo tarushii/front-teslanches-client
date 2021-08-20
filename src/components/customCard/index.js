@@ -5,7 +5,14 @@ import Typography from '@material-ui/core/Typography';
 import precoConvertido from '../../formatting/currency';
 
 export default function CustomCard({
-  id, nome, descricao, quantidade, valor_minimo_pedido, imagem_restaurante: imagemRestaurante
+  id,
+  nome,
+  preco,
+  descricao,
+  quantidade,
+  valor_minimo_pedido,
+  imagem_restaurante: imagemRestaurante,
+  imagem,
 }) {
   return (
 
@@ -22,8 +29,11 @@ export default function CustomCard({
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             <div className="valorBox">
-              <span>
+              <span className="campoPrecoPadrao">
                 {precoConvertido(valor_minimo_pedido)}
+              </span>
+              <span className="campoPrecoCart">
+                {precoConvertido(preco)}
               </span>
             </div>
           </Typography>
@@ -31,6 +41,7 @@ export default function CustomCard({
       </div>
       <div className="flexRow mr1rem">
         <img className="imgCard" src={`${imagemRestaurante}`} alt={`foto de ${nome}`} />
+        <img className="imgCardCart" src={`${imagem}`} alt={`foto de ${nome}`} />
       </div>
 
     </card>

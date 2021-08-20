@@ -12,18 +12,16 @@ import useStyles from './styles';
 import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 
-import carrinho from '../../assets/carrinho.svg';
+import iconeCarrinho from '../../assets/carrinho.svg';
 import CustomCard from '../../components/customCard';
 import iconeConfirma from '../../assets/iconeConfirma.svg';
 import iconeSemPedido from '../../assets/semPedidos.svg';
 
 export default function Cart({
-  id: idProduto,
-  nome,
-  descricao,
-  preco,
+  carrinho,
   recarregarPag,
-  imagem_produto: temImagem,
+  imagem,
+  subTotal,
   valor_minimo_pedido: valorMinimo,
   tempo_entrega_minutos: tempoMinutos,
   taxa_entrega: taxaEntrega
@@ -31,12 +29,12 @@ export default function Cart({
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(0);
   const [addCarrinho, setAddCarrinho] = useState([]);
-  const [subtotal, setSubtotal] = useState([]);
   const [open, setOpen] = useState(false);
   // const [pedidoEnviado, setPedidoEnviado] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
   const customId = 'custom-id-yes';
+  const carinhoVazio = carrinho.length === 0;
   const {
     register, handleSubmit, formState: { errors }
   } = useForm({
@@ -131,13 +129,13 @@ export default function Cart({
         <div className="flexColumn">
           <div className="bodyCart flexColumn">
             <div className="topCart flexRow posRelative gap2rem ">
-              <img id="iconCart" src={carrinho} alt="foto carrinho" />
+              <img id="iconCart" src={iconeCarrinho} alt="foto carrinho" />
               <h1>Nome do restaurante</h1>
               <button id="btCrossCart" className="btCross" type="button" onClick={handleClose}>
                 &times;
               </button>
             </div>
-            <div className={`${pedidoEnviado ? 'none' : 'midCart'}`}>
+            <div className={`${carinhoVazio ? 'none' : 'midCart'}`}>
               <div className={`${endereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
                 <span>
                   {endereco}
@@ -148,22 +146,25 @@ export default function Cart({
               </div>
               <h4>
                 Tempo de Entrega:
-                { tempoMinutos }
+                <span className="spanTempoEntrega">
+                  {' '}
+                  { tempoMinutos }
+                  {' '}
+                </span>
+                minutos, aproximadamente
               </h4>
               {/* TODO - display none */}
               <div className="none produtoNoCarrinho flexColumn contentCenter itemsCenter">
                 <p>Pedido adicionado!</p>
               </div>
               {/* TODO - display none */}
-              <div className=" conteinerDetalhesProduto px3rem">
-
+              <div className={`${carinhoVazio ? 'none' : 'conteinerDetalhesProduto'} px3rem`}>
                 <div className="cardsProdutos flexColumn gap1rem mt2rem contentCenter px2rem">
-                  { produtos.map((produto) => (
+                  { carrinho.map((produto) => (
                     <div className="cardCart ">
                       <CustomCard
                         id="miniCard"
                         {...produto}
-                        unidades={quantidade}
                         verificaAtivo="tem que por"
                       />
                     </div>
@@ -177,7 +178,7 @@ export default function Cart({
                   <div className="flexColumn contentCenter px2rem">
                     <div className="subTotal flexRow contentBetween mb06rem">
                       <span>Subtotal</span>
-                      <span>{precoConvertido(subtotal)}</span>
+                      <span>{precoConvertido(subTotal)}</span>
                     </div>
                     <div className="taxaEntrega flexRow contentBetween mb1rem">
                       <span>Taxa de entrega</span>
@@ -185,7 +186,7 @@ export default function Cart({
                     </div>
                     <div className="total flexRow contentBetween mb06rem">
                       <span>Total</span>
-                      <h2>{precoConvertido(subtotal + taxaEntrega)}</h2>
+                      <h2>{precoConvertido(subTotal + taxaEntrega)}</h2>
                     </div>
                     <div className="flexRow contentCenter itemsCenter">
                       <button id="btConfirmaPedido" className="btLaranja" type="submit" onClick={handleSubmit(onSubmit)}>
@@ -207,7 +208,7 @@ export default function Cart({
                 Voltar para cardápio
               </button>
             </div> */}
-            <div className={`${pedidoEnviado ? 'semPedidos' : 'none'} flexColumn contentCenter itemsCenter mt1rem px3rem`}>
+            <div className={`${carinhoVazio ? 'semPedidos' : 'none'} flexColumn contentCenter itemsCenter mt1rem px3rem`}>
               <p>
                 <span>Endereço de Entrega:</span>
                 {' '}
