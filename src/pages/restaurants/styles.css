@@ -175,3 +175,7 @@ button.addRestaurantes{
 .conteinerCardapio .campoQuantidade{
   display: none;
 }
+
+ .boxCardRestaurantes .campoPrecoCart{
+    display: none;
+  }
