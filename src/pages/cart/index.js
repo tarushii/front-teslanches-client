@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
@@ -10,14 +11,16 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import useStyles from './styles';
-import { postEstadoProduto, put } from '../../services/apiClient';
+import {
+  postEstadoProduto, put, get, postAutenticado
+} from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 import Order from '../order';
 import useAuth from '../../hooks/useAuth';
 
 import iconeCarrinho from '../../assets/carrinho.svg';
 import CustomCard from '../../components/customCard';
-import iconeConfirma from '../../assets/iconeConfirma.svg';
+// import iconeConfirma from '../../assets/iconeConfirma.svg';
 import iconeSemPedido from '../../assets/semPedidos.svg';
 import Address from '../address';
 
@@ -29,21 +32,20 @@ export default function Cart({
   recarregarPag,
   imagemProduto,
   subTotal,
-  valor_minimo_pedido: valorMinimo,
-  tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega,
+
   nomeAbrirCart
 }) {
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(0);
   const [addCarrinho, setAddCarrinho] = useState([]);
+  const [temEndereco, setTemEndereco] = useState([]);
   const [open, setOpen] = useState(false);
   // const [pedidoEnviado, setPedidoEnviado] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
   const customId = 'custom-id-yes';
   const {
-    user, adicionarNoCarrinho, removerDoCarrinho, carrinhoLS
+    user, adicionarNoCarrinho, removerDoCarrinho, token, cart, rest
   } = useAuth();
   const carinhoVazio = carrinho.length === 0;
   const {
@@ -74,26 +76,61 @@ export default function Cart({
     setCarregando(true);
     setErro('');
 
-    // const { ...dadosAtualizados } = Object
-    //   .fromEntries(Object
-    //     .entries(data)
-    //     .filter(([, value]) => value));
+    async function buscarEndereco() {
+      try {
+        const { dados, ok } = await get(`/consumidor/${rest.id}/endereco`, token);
+
+        if (!ok) {
+          toast.error(dados, { toastId: customId });
+          return;
+        }
+        if (!dados) {
+          return;
+        }
+      } catch (error) {
+        toast.error(error.message, { toastId: customId });
+      }
+    }
+
+    // TODO - verificar se ta ativo
+    // data deve conter os dados abaixo
+    // {
+    //   "idRestaurante": 1,
+    //   "idConsumidor": 1,
+    //   "valorProdutos": 12300,
+    //   "taxaDeEntrega": 1230,
+    //   "valorTotal": 13530,
+    //   "enderecoDeEntrega": "ENDEREÇO - COMPLEMENTO - CEP",
+    //   "carrinho": {
+    //     "0": {
+    //       "id": 1,
+    //       "nome": "Bolacha de Caramelo com Ketchup",
+    //       "preco": 1230,
+    //       "quantidade": 5,
+    //       "valorTotal": 6150
+    //     },
+    //     "1": {
+    //       "id": 0,
+    //       "nome": "Pão doce",
+    //       "preco": 1230,
+    //       "quantidade": 3,
+    //       "valorTotal": 6150
+    //     }
+    //   }
+    // }
+    const { ...pedido } = Object
+      .fromEntries(Object
+        .entries(data)
+        .filter(([, value]) => value));
 
     try {
-      // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
-      // if (!ok) {
-      //   setErro(dados);
-      //   toast.error(dados);
-      //   return;
-      // }
+      const { dados, ok } = await postAutenticado('/consumidor/registrarPedido', pedido, token);
 
-      // if (ativou) {
-      //   await postEstadoProduto(`/produtos/${idProduto}/ativar`, token);
-      //   toast.warn('O produto foi ativado!');
-      // } else {
-      //   await postEstadoProduto(`/produtos/${idProduto}/desativar`, token);
-      //   toast.warn('O produto foi desativado');
-      // }
+      if (!ok) {
+        setErro(dados);
+        toast.error(dados);
+        return;
+      }
 
       setCarregando(false);
     } catch (error) {
@@ -101,12 +138,25 @@ export default function Cart({
       setErro(error.message);
     }
     // setPedidoEnviado(true);
-    // handleClose();
-    // recarregarPag();
+    handleClose();
+    recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
   }
 
-  const endereco = '';
+  const {
+    categoria_id,
+    email,
+    nomeusuario,
+    ...newRest
+  } = rest;
+
+  const {
+    valor_minimo_pedido: valorMinimo,
+    tempo_entrega_minutos: tempoMinutos,
+    taxa_entrega: taxaEntrega,
+    nome: nomeRestaurante,
+    imagem_restaurante: avatarRestaurante,
+  } = newRest;
 
   return (
     <div onClick={(e) => stop(e)} className={classes.container}>
@@ -127,18 +177,18 @@ export default function Cart({
           <div className="bodyCart flexColumn">
             <div className="topCart flexRow posRelative gap2rem ">
               <img id="iconCart" src={iconeCarrinho} alt="foto carrinho" />
-              <h1>Nome do restaurante</h1>
+              <h1>{nomeRestaurante}</h1>
               <button id="btCrossCart" className="btCross" type="button" onClick={handleClose}>
                 &times;
               </button>
             </div>
             <div className={`${carinhoVazio ? 'none' : 'midCart'}`}>
-              <div className={`${endereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
+              <div className={`${temEndereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
                 <span>
-                  {endereco}
+                  {temEndereco}
                 </span>
               </div>
-              <div className={`${endereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
+              <div className={`${temEndereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
                 <Address />
               </div>
               <h4>
@@ -167,10 +217,10 @@ export default function Cart({
                       <Order
                         carrinho={carrinho}
                         subTotal={subTotal}
-                        {...restaurante}
+                        {...cart}
+                        {...newRest}
                         handleCarrinho={handleCarrinho}
                       />
-                      {console.log({ produto })}
                     </div>
                   ))}
                 </div>
@@ -219,7 +269,6 @@ export default function Cart({
                 Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021
               </p>
               <img id="iconSemPedidos" src={iconeSemPedido} alt="foto de ok" />
-
             </div>
           </div>
         </div>
