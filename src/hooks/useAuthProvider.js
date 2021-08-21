@@ -4,6 +4,7 @@ import { useLocalStorage } from 'react-use';
 export default function useAuthProvider() {
   const [tokenPersistido, setTokenPersistido, removeTokenPersistido] = useLocalStorage('TOKEN', null);
   const [usuario, setUsuario, removeUsuario] = useLocalStorage('USUARIO', {});
+  const [carrinhoLS, setCarrinhoLS, removeCarrinhoLS] = useLocalStorage('CARRINHO', []);
 
   const [user, setUser] = useState(usuario);
   const [token, setToken] = useState(tokenPersistido);
@@ -21,11 +22,21 @@ export default function useAuthProvider() {
     removeUsuario();
   };
 
+  function adicionarNoCarrinho(cart) {
+    setCarrinhoLS(cart);
+  }
+
+  function removerDoCarrinho() {
+    removeCarrinhoLS();
+  }
+
   return {
     user,
     token,
     logar,
     deslogar,
-
+    adicionarNoCarrinho,
+    removerDoCarrinho,
+    carrinhoLS
   };
 }
