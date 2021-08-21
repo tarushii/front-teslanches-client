@@ -132,7 +132,6 @@ export default function produtos() {
     }
   };
 
-  console.log(cart);
   return (
     <div className="bodyProdutos">
       <div style={categoriaStyle()} className="conteinerTopo contentCenter itemsCenter">

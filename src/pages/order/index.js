@@ -101,7 +101,7 @@ export default function PedidoProduto({
       setErro(error.message);
     }
 
-    // handleClose();
+    handleClose();
     // recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
   }
