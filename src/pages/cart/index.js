@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -11,20 +12,27 @@ import { useForm } from 'react-hook-form';
 import useStyles from './styles';
 import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
+import Order from '../order';
+import useAuth from '../../hooks/useAuth';
 
 import iconeCarrinho from '../../assets/carrinho.svg';
 import CustomCard from '../../components/customCard';
 import iconeConfirma from '../../assets/iconeConfirma.svg';
 import iconeSemPedido from '../../assets/semPedidos.svg';
+import Address from '../address';
 
 export default function Cart({
   carrinho,
+  descricao,
+  restaurante,
+  handleCarrinho,
   recarregarPag,
-  imagem,
+  imagemProduto,
   subTotal,
   valor_minimo_pedido: valorMinimo,
   tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega
+  taxa_entrega: taxaEntrega,
+  nomeAbrirCart
 }) {
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(0);
@@ -34,6 +42,9 @@ export default function Cart({
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
   const customId = 'custom-id-yes';
+  const {
+    user, adicionarNoCarrinho, removerDoCarrinho, carrinhoLS
+  } = useAuth();
   const carinhoVazio = carrinho.length === 0;
   const {
     register, handleSubmit, formState: { errors }
@@ -67,7 +78,7 @@ export default function Cart({
     //   .fromEntries(Object
     //     .entries(data)
     //     .filter(([, value]) => value));
-    console.log(data);
+
     try {
       // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
       // if (!ok) {
@@ -95,21 +106,7 @@ export default function Cart({
     toast.success('O pedido foi atualizado com sucesso!');
   }
 
-  const produtos = [
-    {
-      nome: 'pizza de bambu',
-      unidades: '',
-      preco: 4300
-    },
-    {
-      nome: 'omelete de gatos',
-      unidades: '',
-      preco: 3900
-    },
-  ];
-
   const endereco = '';
-  const pedidoEnviado = true;
 
   return (
     <div onClick={(e) => stop(e)} className={classes.container}>
@@ -119,7 +116,7 @@ export default function Cart({
         className="btLaranja mt2rem"
         onClick={handleClickOpen}
       >
-        Revisar Pedido
+        {nomeAbrirCart}
       </button>
       <Dialog
         open={open}
@@ -142,7 +139,7 @@ export default function Cart({
                 </span>
               </div>
               <div className={`${endereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
-                <button className="btTransparente" type="button">Adicionar Endereço</button>
+                <Address />
               </div>
               <h4>
                 Tempo de Entrega:
@@ -167,6 +164,13 @@ export default function Cart({
                         {...produto}
                         verificaAtivo="tem que por"
                       />
+                      <Order
+                        carrinho={carrinho}
+                        subTotal={subTotal}
+                        {...restaurante}
+                        handleCarrinho={handleCarrinho}
+                      />
+                      {console.log({ produto })}
                     </div>
                   ))}
                 </div>
