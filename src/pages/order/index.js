@@ -16,18 +16,23 @@ import plusIcon from '../../assets/plusIcon.svg';
 import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
 import iconeCarrinho from '../../assets/carrinho.svg';
+import Cart from '../cart';
 
 export default function PedidoProduto({
   nome,
   descricao,
   preco,
+  imagem,
   recarregarPag,
   handleCarrinho,
-  imagem_produto: produtoImagem,
+  imagem_produto: imagemProduto,
   valor_minimo_pedido: valorMinimo,
   tempo_entrega_minutos: tempoMinutos,
   taxa_entrega: taxaEntrega,
-  imagem_restaurante: avatarRestaurante
+  imagem_restaurante: avatarRestaurante,
+  carrinho,
+  subTotal,
+  restaurante
 }) {
   const [erro, setErro] = useState('');
   const [quantidade, setQuantidade] = useState(1);
@@ -71,9 +76,8 @@ export default function PedidoProduto({
     dadosAtualizados.quantidade = quantidade;
     dadosAtualizados.nome = nome;
     dadosAtualizados.preco = preco;
-    dadosAtualizados.imagem = produtoImagem;
+    dadosAtualizados.imagemProduto = imagemProduto;
 
-    console.log(dadosAtualizados);
     handleCarrinho(dadosAtualizados);
     try {
       // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
@@ -120,7 +124,7 @@ export default function PedidoProduto({
         <div className="flexColumn">
           <div className="bodyDetalheProduto flexColumn gap3rem ">
             <div className="conteinerFotoProduto posRelative mb3rem">
-              <img id="fotoProduto" src={produtoImagem} alt="foto do produto" className="fotoProduto" />
+              <img id="fotoProduto" src={imagemProduto} alt="foto do produto" className="fotoProduto" />
               <img className="avatarDetalheRestaurante" src={avatarRestaurante} alt="avatar do restaurante" />
               <button className="btCross" type="button" onClick={handleClose}>
                 &times;
@@ -173,8 +177,8 @@ export default function PedidoProduto({
                 </div>
               </form>
             </div>
-            <div className="flexRow contentCenter mt1rem">
-              <button id="btTransparenteCinza" type="submit">Ir para a revisão do pedido</button>
+            <div className="boxRevisaoPedido flexRow contentCenter mt1rem">
+              <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" />
             </div>
           </div>
         </div>
