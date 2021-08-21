@@ -8,30 +8,19 @@ import Dialog from '@material-ui/core/Dialog';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaAddress } from '../../validation/schema';
 import useStyles from './styles';
 import { postEstadoProduto, put } from '../../services/apiClient';
-import precoConvertido from '../../formatting/currency';
+import {
+  toastEndereco, toastCep, toastComplemento
+} from '../../validation/toastfy';
 
 import carrinho from '../../assets/carrinho.svg';
-import CustomCard from '../../components/customCard';
 import iconeConfirma from '../../assets/iconeConfirma.svg';
-import iconeSemPedido from '../../assets/semPedidos.svg';
 
-export default function Address({
-  id: idProduto,
-  nome,
-  descricao,
-  preco,
-  recarregarPag,
-  imagem_produto: temImagem,
-  valor_minimo_pedido: valorMinimo,
-  tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega
-}) {
+export default function Address() {
   const [erro, setErro] = useState('');
-  const [quantidade, setQuantidade] = useState(0);
-  const [addCarrinho, setAddCarrinho] = useState([]);
-  const [subtotal, setSubtotal] = useState([]);
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
@@ -46,7 +35,18 @@ export default function Address({
     criteriaMode: 'firstError',
     shouldFocusError: true,
     shouldUnregister: true,
+    resolver: yupResolver(schemaAddress)
   });
+
+  if (errors.cep) {
+    toastCep();
+  }
+  if (errors.endereco) {
+    toastEndereco();
+  }
+  if (errors.complemento) {
+    toastComplemento();
+  }
 
   function handleClickOpen() {
     setOpen(true);
@@ -91,20 +91,19 @@ export default function Address({
       setErro(error.message);
     }
     // setPedidoEnviado(true);
-    // handleClose();
+    handleClose();
     // recarregarPag();
-    toast.success('O pedido foi atualizado com sucesso!');
+    toast.success('O endereço foi atualizado com sucesso!');
   }
 
-  const endereco = '';
-  const enderecoEnviado = true;
+  const enderecoEnviado = false;
 
   return (
     <div onClick={(e) => stop(e)} className={classes.container}>
       <button
         id="btAddress"
         type="button"
-        className="btLaranja mt2rem"
+        className="btTransparente mt2rem"
         onClick={handleClickOpen}
       >
         Endereço
