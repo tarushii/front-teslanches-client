@@ -12,7 +12,7 @@ export default function CustomCard({
   quantidade,
   valor_minimo_pedido,
   imagem_restaurante: imagemRestaurante,
-  imagem,
+  imagemProduto,
 }) {
   return (
 
@@ -40,8 +40,8 @@ export default function CustomCard({
         </cardcontent>
       </div>
       <div className="flexRow mr1rem">
-        <img className="imgCard" src={`${imagemRestaurante}`} alt={`foto de ${nome}`} />
-        <img className="imgCardCart" src={`${imagem}`} alt={`foto de ${nome}`} />
+        <img className="imgCard" src={`${imagemRestaurante}`} alt="foto do restaurante" />
+        <img className="imgCardCart" src={`${imagemProduto}`} alt={`foto de ${nome}`} />
       </div>
 
     </card>
