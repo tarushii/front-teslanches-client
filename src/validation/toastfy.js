@@ -26,6 +26,15 @@ function toastPreco() {
 function toastTaxaDeEntrega() {
   toast.error('O taxa de entrega é obrigatorio', { toastId: customId });
 }
+function toastCep() {
+  toast.error('O CEP é obrigatorio e precisa ter 8 digitos', { toastId: customId });
+}
+function toastEndereco() {
+  toast.error('O endereço é obrigatorio e com maximo de 30 caracteres', { toastId: customId });
+}
+function toastComplemento() {
+  toast.error('O complemento é obrigatorio e com maximo de 30 caracteres', { toastId: customId });
+}
 
 export {
   toastDescricao,
@@ -35,5 +44,8 @@ export {
   toastSenha,
   toastSenhaConfere,
   toastTaxaDeEntrega,
-  toastTelefone
+  toastTelefone,
+  toastCep,
+  toastEndereco,
+  toastComplemento
 };

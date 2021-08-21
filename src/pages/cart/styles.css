@@ -216,3 +216,14 @@
   line-height: 150%;
   color: #525459;
 }
+
+.cardsProdutos .cardCart button{
+  all: unset;
+  position: absolute ;
+  width: 21.625rem !important;
+  height: 5.125rem !important;
+  padding-top: 0 !important;
+  transform: translateY(-5rem) !important;
+  cursor: pointer;
+  color: transparent;
+}
