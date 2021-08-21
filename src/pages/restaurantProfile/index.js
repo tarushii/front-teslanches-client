@@ -32,7 +32,7 @@ import emptyStore from '../../assets/emptyStore.svg';
 export default function produtos() {
   const { log } = console;
   const {
-    user, token, deslogar, adicionarNoCarrinho, carrinhoLS
+    user, token, deslogar, setCarrinhoLS, setRestauranteLS, cart
   } = useAuth();
   const [prod, setProd] = useState([]);
   const [f5, setF5] = useState(false);
@@ -67,6 +67,7 @@ export default function produtos() {
         }
         toast.success(dados);
 
+        setRestauranteLS(dados);
         return setRestaurante(dados);
       } catch (error) {
         return toast.error(error.message);
@@ -98,7 +99,7 @@ export default function produtos() {
       quantidade: produto.quantidade,
       imagemProduto: produto.imagemProduto,
     }]);
-    adicionarNoCarrinho(novoCarrinho);
+    setCarrinhoLS(novoCarrinho);
   }
 
   const categoriaStyle = () => {
@@ -131,6 +132,7 @@ export default function produtos() {
     }
   };
 
+  console.log(cart);
   return (
     <div className="bodyProdutos">
       <div style={categoriaStyle()} className="conteinerTopo contentCenter itemsCenter">
@@ -146,7 +148,6 @@ export default function produtos() {
           <Cart
             carrinho={carrinho}
             subTotal={subTotal}
-            restaurante={restaurante}
             {...restaurante}
             nomeAbrirCart="Revisar pedido"
           />
