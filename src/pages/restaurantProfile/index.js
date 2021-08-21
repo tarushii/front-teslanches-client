@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-use-before-define */
@@ -8,7 +9,7 @@ import { toast } from 'react-toastify';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
-import PedidoProduto from '../order';
+import Order from '../order';
 import Cart from '../cart';
 
 import illustrationTop from '../../assets/illustration-top.svg';
@@ -30,7 +31,9 @@ import emptyStore from '../../assets/emptyStore.svg';
 
 export default function produtos() {
   const { log } = console;
-  const { user, token, deslogar } = useAuth();
+  const {
+    user, token, deslogar, adicionarNoCarrinho, carrinhoLS
+  } = useAuth();
   const [prod, setProd] = useState([]);
   const [f5, setF5] = useState(false);
   const [restaurante, setRestaurante] = useState([]);
@@ -93,8 +96,9 @@ export default function produtos() {
       nome: produto.nome,
       preco: produto.preco,
       quantidade: produto.quantidade,
-      imagem: produto.imagem,
+      imagemProduto: produto.imagemProduto,
     }]);
+    adicionarNoCarrinho(novoCarrinho);
   }
 
   const categoriaStyle = () => {
@@ -138,7 +142,15 @@ export default function produtos() {
       <img className="vetorProdutos" src={illustrationTop} alt="vetor" />
       <img src={restaurante.imagem_restaurante} alt="avatarRestaurante" className="avatarRestaurante" />
       <div className="contemBotao flexRow itemsCenter botaoCarrinho">
-        <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} />
+        {carrinho.length > 0 ? (
+          <Cart
+            carrinho={carrinho}
+            subTotal={subTotal}
+            restaurante={restaurante}
+            {...restaurante}
+            nomeAbrirCart="Revisar pedido"
+          />
+        ) : ('')}
       </div>
       <div className="icons">
         <div className="icons1">
@@ -171,7 +183,13 @@ export default function produtos() {
                 {...produto}
                 recarregarPag={() => setF5(true)}
               />
-              <PedidoProduto {...restaurante} {...produto} handleCarrinho={handleCarrinho} />
+              <Order
+                {...restaurante}
+                {...produto}
+                carrinho={carrinho}
+                subTotal={subTotal}
+                handleCarrinho={handleCarrinho}
+              />
             </div>
           ))}
         </div>
