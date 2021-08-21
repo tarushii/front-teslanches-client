@@ -14,4 +14,11 @@ const schemaCadastro = yup.object().shape({
   senhaConfere: yup.string().min(8).max(16).required(),
 });
 
-export { schemaCadastro, schemaLogin };
+const schemaAddress = yup.object().shape({
+  cep: yup.string().min(8).max(8).required()
+    .matches(/^[0-9]+$/),
+  endereco: yup.string().max(30).required(),
+  complemento: yup.string().max(30).required(),
+});
+
+export { schemaCadastro, schemaLogin, schemaAddress };
