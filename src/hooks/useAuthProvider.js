@@ -4,10 +4,13 @@ import { useLocalStorage } from 'react-use';
 export default function useAuthProvider() {
   const [tokenPersistido, setTokenPersistido, removeTokenPersistido] = useLocalStorage('TOKEN', null);
   const [usuario, setUsuario, removeUsuario] = useLocalStorage('USUARIO', {});
+  const [restauranteLS, setRestauranteLS, removeRestauranteLS] = useLocalStorage('RESTAURANTE', {});
   const [carrinhoLS, setCarrinhoLS, removeCarrinhoLS] = useLocalStorage('CARRINHO', []);
 
   const [user, setUser] = useState(usuario);
   const [token, setToken] = useState(tokenPersistido);
+  const [rest, setRest] = useState(restauranteLS);
+  const [cart, setCart] = useState(carrinhoLS);
 
   const logar = (usuario, token) => {
     setToken(token);
@@ -22,8 +25,8 @@ export default function useAuthProvider() {
     removeUsuario();
   };
 
-  function adicionarNoCarrinho(cart) {
-    setCarrinhoLS(cart);
+  function adicionarNoCarrinho(carrinho) {
+    setCarrinhoLS(carrinho);
   }
 
   function removerDoCarrinho() {
@@ -35,8 +38,11 @@ export default function useAuthProvider() {
     token,
     logar,
     deslogar,
-    adicionarNoCarrinho,
-    removerDoCarrinho,
-    carrinhoLS
+    setCarrinhoLS,
+    removeCarrinhoLS,
+    cart,
+    setRestauranteLS,
+    removeRestauranteLS,
+    rest
   };
 }
