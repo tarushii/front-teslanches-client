@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
@@ -11,9 +12,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import useStyles from './styles';
-import {
-  postEstadoProduto, put, get, postAutenticado
-} from '../../services/apiClient';
+import { get, postAutenticado } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 import Order from '../order';
 import useAuth from '../../hooks/useAuth';
@@ -93,38 +92,22 @@ export default function Cart({
     }
 
     // TODO - verificar se ta ativo
-    // data deve conter os dados abaixo
-    // {
-    //   "idRestaurante": 1,
-    //   "idConsumidor": 1,
-    //   "valorProdutos": 12300,
-    //   "taxaDeEntrega": 1230,
-    //   "valorTotal": 13530,
-    //   "enderecoDeEntrega": "ENDEREÇO - COMPLEMENTO - CEP",
-    //   "carrinho": {
-    //     "0": {
-    //       "id": 1,
-    //       "nome": "Bolacha de Caramelo com Ketchup",
-    //       "preco": 1230,
-    //       "quantidade": 5,
-    //       "valorTotal": 6150
-    //     },
-    //     "1": {
-    //       "id": 0,
-    //       "nome": "Pão doce",
-    //       "preco": 1230,
-    //       "quantidade": 3,
-    //       "valorTotal": 6150
-    //     }
-    //   }
-    // }
-    const { ...pedido } = Object
+
+    const { ...dadosAtualizados } = Object
       .fromEntries(Object
         .entries(data)
         .filter(([, value]) => value));
 
+    dadosAtualizados.idRestaurante = rest.id;
+    dadosAtualizados.idConsumidor = user.ID;
+    dadosAtualizados.valorProdutos = subTotal;
+    dadosAtualizados.taxaDeEntrega = taxaEntrega;
+    dadosAtualizados.valorTotal = taxaEntrega + subTotal;
+    dadosAtualizados.enderecoDeEntrega = JSON.stringify(temEndereco);
+    dadosAtualizados.carrinho = { carrinho };
+
     try {
-      const { dados, ok } = await postAutenticado('/consumidor/registrarPedido', pedido, token);
+      const { dados, ok } = await postAutenticado('/consumidor/registrarPedido', dadosAtualizados, token);
 
       if (!ok) {
         setErro(dados);
@@ -137,9 +120,8 @@ export default function Cart({
       toast.error(error.message);
       setErro(error.message);
     }
-    // setPedidoEnviado(true);
     handleClose();
-    recarregarPag();
+    // recarregarPag();
     toast.success('O pedido foi atualizado com sucesso!');
   }
 
@@ -182,15 +164,32 @@ export default function Cart({
                 &times;
               </button>
             </div>
+            <div className={`${temEndereco.length === 0 ? 'conteinerFaltaEndereco' : 'none'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
+              <Address setTemEndereco={setTemEndereco} />
+            </div>
+            <div className={`${temEndereco.length === 0 ? 'none' : 'conteinerEndereco'} px3rem mb2rem flewRow gap06rem`}>
+              <span>
+                CEP
+                {' '}
+                { temEndereco.cep }
+                {' '}
+              </span>
+              <span>
+                {' '}
+                Endereço
+                {' '}
+                { temEndereco.endereco }
+                {' '}
+              </span>
+              <span>
+                {' '}
+                Complemento
+                {' '}
+                { temEndereco.complemento }
+                {' '}
+              </span>
+            </div>
             <div className={`${carinhoVazio ? 'none' : 'midCart'}`}>
-              <div className={`${temEndereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem`}>
-                <span>
-                  {temEndereco}
-                </span>
-              </div>
-              <div className={`${temEndereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
-                <Address />
-              </div>
               <h4>
                 Tempo de Entrega:
                 <span className="spanTempoEntrega">
