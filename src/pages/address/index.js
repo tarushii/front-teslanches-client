@@ -11,7 +11,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaAddress } from '../../validation/schema';
 import useStyles from './styles';
-import { postEstadoProduto, put } from '../../services/apiClient';
+import useAuth from '../../hooks/useAuth';
+import {
+  patch, postAutenticado, postEstadoProduto, put
+} from '../../services/apiClient';
 import {
   toastEndereco, toastCep, toastComplemento
 } from '../../validation/toastfy';
@@ -19,11 +22,14 @@ import {
 import carrinho from '../../assets/carrinho.svg';
 import iconeConfirma from '../../assets/iconeConfirma.svg';
 
-export default function Address() {
+export default function Address({ setTemEndereco }) {
   const [erro, setErro] = useState('');
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
+  const {
+    user, token, rest
+  } = useAuth();
   const customId = 'custom-id-yes';
   const {
     register, handleSubmit, formState: { errors }
@@ -64,32 +70,27 @@ export default function Address() {
     setCarregando(true);
     setErro('');
 
-    // const { ...dadosAtualizados } = Object
-    //   .fromEntries(Object
-    //     .entries(data)
-    //     .filter(([, value]) => value));
-    console.log(data);
-    try {
-      // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
-      // if (!ok) {
-      //   setErro(dados);
-      //   toast.error(dados);
-      //   return;
-      // }
+    const { ...dadosAtualizados } = Object
+      .fromEntries(Object
+        .entries(data)
+        .filter(([, value]) => value));
+    dadosAtualizados.id = rest.id;
+    dadosAtualizados.consumidor_id = user.ID;
 
-      // if (ativou) {
-      //   await postEstadoProduto(`/produtos/${idProduto}/ativar`, token);
-      //   toast.warn('O produto foi ativado!');
-      // } else {
-      //   await postEstadoProduto(`/produtos/${idProduto}/desativar`, token);
-      //   toast.warn('O produto foi desativado');
-      // }
+    try {
+      const { dados, ok } = await postAutenticado('/consumidor/adicionarEndereco', dadosAtualizados, token);
+      if (!ok) {
+        setErro(dados);
+        toast.error(dados);
+        return;
+      }
 
       setCarregando(false);
     } catch (error) {
       toast.error(error.message);
       setErro(error.message);
     }
+    setTemEndereco(data);
     // setPedidoEnviado(true);
     handleClose();
     // recarregarPag();
@@ -149,7 +150,7 @@ export default function Address() {
                 </div>
               </div>
             </div>
-            <div className={`${enderecoEnviado ? 'enderecoEnviado' : 'none'} flexColumn contentCenter itemsCenter mt1rem`}>
+            {/* <div className={`${enderecoEnviado ? 'enderecoEnviado' : 'none'} flexColumn contentCenter itemsCenter mt1rem`}>
               <img id="iconConfirma" src={iconeConfirma} alt="foto de ok" />
               <p>
                 Endereço adicionado
@@ -158,7 +159,7 @@ export default function Address() {
               <button className="btLaranja" type="button" onClick={handleClose}>
                 Voltar para o carrinho
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </Dialog>

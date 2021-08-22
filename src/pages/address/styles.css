@@ -51,7 +51,7 @@
 
 
 #btConfirmaEndereco{
-  transform: translateY(2.5rem);
+  margin-top: 3rem;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
   transition-duration: 0.3s;
 }
@@ -63,7 +63,7 @@
 #btConfirmaEndereco:active {
   background-color: #D1320150;
   box-shadow: 0 .3125rem 1.5625rem rgb(99, 99, 99);
-  transform: translateY(.25rem);
+  transform: translateY(0.2rem);
   transition: .3s;
 }
 
