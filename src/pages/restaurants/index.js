@@ -115,7 +115,6 @@ export default function restaurantes() {
             placeholder="Buscar"
             onChange={(e) => setFiltroLojas(e.target.value)}
           />
-          <Address />
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
