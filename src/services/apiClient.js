@@ -81,6 +81,21 @@ async function postEstadoProduto(point, token) {
   return { dados, ok: resposta.ok };
 }
 
+async function patch(point, data, token) {
+  const resposta = await fetch(BASE_URL + point, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-type': 'application/json',
+      tokenUsuario: `${token}`
+    }
+  });
+
+  const dados = await resposta.json();
+
+  return { dados, ok: resposta.ok };
+}
+
 export {
-  postNaoAutenticado, postAutenticado, get, put, del, postEstadoProduto
+  postNaoAutenticado, postAutenticado, get, put, del, postEstadoProduto, patch
 };
