@@ -30,7 +30,6 @@ import iconTime from '../../assets/timeIcon.svg';
 import emptyStore from '../../assets/emptyStore.svg';
 
 export default function produtos() {
-  const { log } = console;
   const {
     user, token, deslogar, setCarrinhoLS, setRestauranteLS, cart
   } = useAuth();
@@ -94,6 +93,7 @@ export default function produtos() {
       return;
     }
     setCarrinho([...novoCarrinho, {
+      id: produto.id,
       nome: produto.nome,
       preco: produto.preco,
       quantidade: produto.quantidade,
@@ -101,7 +101,6 @@ export default function produtos() {
     }]);
     setCarrinhoLS(novoCarrinho);
   }
-
   const categoriaStyle = () => {
     const categoria = restaurante.categoria_id;
     switch (categoria) {
