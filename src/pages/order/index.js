@@ -19,6 +19,7 @@ import iconeCarrinho from '../../assets/carrinho.svg';
 import Cart from '../cart';
 
 export default function PedidoProduto({
+  id,
   nome,
   descricao,
   preco,
@@ -73,28 +74,14 @@ export default function PedidoProduto({
         .entries(data)
         .filter(([, value]) => value));
 
-    dadosAtualizados.quantidade = quantidade;
+    dadosAtualizados.id = id;
     dadosAtualizados.nome = nome;
     dadosAtualizados.preco = preco;
+    dadosAtualizados.quantidade = quantidade;
     dadosAtualizados.imagemProduto = imagemProduto;
 
     handleCarrinho(dadosAtualizados);
     try {
-      // const { dados, ok } = await put(`/produtos/${idProduto}`, dadosAtualizados, token);
-      // if (!ok) {
-      //   setErro(dados);
-      //   toast.error(dados);
-      //   return;
-      // }
-
-      // if (ativou) {
-      //   await postEstadoProduto(`/produtos/${idProduto}/ativar`, token);
-      //   toast.warn('O produto foi ativado!');
-      // } else {
-      //   await postEstadoProduto(`/produtos/${idProduto}/desativar`, token);
-      //   toast.warn('O produto foi desativado');
-      // }
-
       setCarregando(false);
     } catch (error) {
       toast.error(error.message);
