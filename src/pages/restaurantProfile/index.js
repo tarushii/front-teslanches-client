@@ -97,6 +97,7 @@ export default function produtos() {
       nome: produto.nome,
       preco: produto.preco,
       quantidade: produto.quantidade,
+      valorTotal: (produto.quantidade * produto.preco),
       imagemProduto: produto.imagemProduto,
     }]);
     setCarrinhoLS(novoCarrinho);
@@ -147,6 +148,8 @@ export default function produtos() {
             carrinho={carrinho}
             subTotal={subTotal}
             {...restaurante}
+            recarregarPag={() => setF5(true)}
+            emptyCart={() => setCarrinho([])}
             nomeAbrirCart="Revisar pedido"
           />
         ) : ('')}
