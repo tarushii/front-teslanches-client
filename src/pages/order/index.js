@@ -78,6 +78,7 @@ export default function PedidoProduto({
     dadosAtualizados.nome = nome;
     dadosAtualizados.preco = preco;
     dadosAtualizados.quantidade = quantidade;
+    dadosAtualizados.valorTotal = (quantidade * preco);
     dadosAtualizados.imagemProduto = imagemProduto;
 
     handleCarrinho(dadosAtualizados);

@@ -8,7 +8,7 @@
 import '../../styles/global.css';
 import './styles.css';
 import Dialog from '@material-ui/core/Dialog';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import useStyles from './styles';
@@ -25,6 +25,7 @@ import Address from '../address';
 
 export default function Cart({
   carrinho,
+  emptyCart,
   descricao,
   restaurante,
   handleCarrinho,
@@ -71,13 +72,10 @@ export default function Cart({
     e.stopPropagation();
   }
 
-  async function onSubmit(data) {
-    setCarregando(true);
-    setErro('');
-
+  useEffect(() => {
     async function buscarEndereco() {
       try {
-        const { dados, ok } = await get(`/consumidor/${rest.id}/endereco`, token);
+        const { dados, ok } = await get(`/consumidor/${user.ID}/endereco`, token);
 
         if (!ok) {
           toast.error(dados, { toastId: customId });
@@ -86,12 +84,22 @@ export default function Cart({
         if (!dados) {
           return;
         }
+        setTemEndereco(dados);
       } catch (error) {
         toast.error(error.message, { toastId: customId });
       }
     }
+  }, []);
+
+  async function onSubmit(data) {
+    setCarregando(true);
+    setErro('');
 
     // TODO - verificar se ta ativo
+    if (temEndereco.length === 0) {
+      toast.error('É preciso informar um endereço para a entrega');
+      return;
+    }
 
     const { ...dadosAtualizados } = Object
       .fromEntries(Object
@@ -104,7 +112,7 @@ export default function Cart({
     dadosAtualizados.taxaDeEntrega = taxaEntrega;
     dadosAtualizados.valorTotal = taxaEntrega + subTotal;
     dadosAtualizados.enderecoDeEntrega = JSON.stringify(temEndereco);
-    dadosAtualizados.carrinho = { carrinho };
+    dadosAtualizados.carrinho = carrinho;
 
     try {
       const { dados, ok } = await postAutenticado('/consumidor/registrarPedido', dadosAtualizados, token);
@@ -121,8 +129,9 @@ export default function Cart({
       setErro(error.message);
     }
     handleClose();
-    // recarregarPag();
-    toast.success('O pedido foi atualizado com sucesso!');
+    emptyCart();
+    recarregarPag();
+    toast.success('O pedido foi enviado com sucesso!');
   }
 
   const {
