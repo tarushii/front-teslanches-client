@@ -177,13 +177,13 @@
 }
 #btDeAbrir{
   position: absolute;
-border: none;
+  border: none;
   width: 31.8rem;
   background: transparent;
   border-radius: 1.5rem;
   padding-top: 13rem;
   z-index: 5;
-  transform: translate(0rem, 1rem);
+  transform: translate(0.1rem, -16.8rem);
 }
 
 .produtoAdicionadoCarrinho{

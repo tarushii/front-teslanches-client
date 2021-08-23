@@ -76,6 +76,7 @@ export default function Address({ setTemEndereco }) {
         .filter(([, value]) => value));
     dadosAtualizados.id = rest.id;
     dadosAtualizados.consumidor_id = user.ID;
+    dadosAtualizados.consumidor_email = user.Email;
 
     try {
       const { dados, ok } = await postAutenticado('/consumidor/adicionarEndereco', dadosAtualizados, token);
