@@ -77,11 +77,12 @@
     cursor: pointer;
   }
   
-  .conteinerCardapio{
+  .conteinerCardapio2{
     display: grid;
     grid-template-columns: repeat(2, 37.5rem);
     grid-auto-rows: 15rem ;
     gap: 3rem;
+    margin-left: 25rem;
     max-width: 80rem;
     height: 18.75rem;
   }
@@ -190,3 +191,29 @@
   .boxCardRestauranteProfile .campoPrecoCart{
     display: none;
   }
+
+  .conteinerCardapio2 #campoPrecoPadrao{
+    display: none;
+  }
+
+  #campoPrecoProd{
+    display: unset;
+  }
+
+  .boxCardRestauranteProfile .imgCardProd{
+    display: flex;
+    width: 10.875rem;
+    height: 10.875rem;
+    border: .125rem solid rgba(251, 59, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 1rem;
+  }
+
+  .boxCardRestauranteProfile .imgCard{
+    display: none;
+  }
+
+  .boxCardRestauranteProfile .imgCardCart{
+    display: none;
+  }
+ 

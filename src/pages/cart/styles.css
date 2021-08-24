@@ -160,7 +160,7 @@
   margin-top: .3rem;
 }
 
-.cardCart .card .campoDescricao{
+.cardCart .card .campoDescricao .imgCardProd{
   display: none;
 }
 
@@ -197,7 +197,11 @@
   transform: translateY(9rem);
 }
 
-.cardCart .campoPrecoPadrao{
+.cardCart #campoPrecoPadrao{
+  display: none;
+} 
+
+.cardCart #campoPrecoProd{
   display: none;
 } 
 

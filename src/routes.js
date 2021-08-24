@@ -27,9 +27,9 @@ export default function Routes() {
           <Route path="/" exact component={SigIn} />
           <Route path="/login" component={SigIn} />
           <Route path="/cadastro" component={SingUp} />
-          <Route path="/restaurantes/:id/perfil" component={perfilRestaurante} />
           <RotasProtegidas>
-            <Route path="/restaurantes" component={Restaurantes} />
+            <Route path="/restaurantes/:id/perfil" component={perfilRestaurante} />
+            <Route path="/restaurantes" exact component={Restaurantes} />
           </RotasProtegidas>
         </Switch>
       </Router>

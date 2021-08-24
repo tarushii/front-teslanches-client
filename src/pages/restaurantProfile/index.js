@@ -161,7 +161,7 @@ export default function produtos() {
 
             <span>Pedido Minimo: </span>
             $
-            {restaurante.valor_minimo_pedido}
+            {restaurante.valor_minimo_pedido / 100}
           </h3>
         </div>
         <div>
@@ -178,7 +178,7 @@ export default function produtos() {
       </div>
       <div className={`${prod.length === 0 ? 'none' : 'contemProdutos'} flexColunm contentCenter itemsCenter mt2rem`}>
 
-        <div className="conteinerCardapio flexRow gap2rem">
+        <div className="conteinerCardapio2 flexRow gap2rem">
           { prod.map((produto) => (
             <div className="boxCardRestauranteProfile" aria-hidden="true">
               <CustomCard
@@ -199,7 +199,7 @@ export default function produtos() {
       <div className={`${prod.length === 0 ? 'addProdutos' : 'none'} flexColunm contentCenter itemsCenter`}>
         <div className="retangulo">
           <img src={emptyStore} alt="Loja sem produtos disponiveis" />
-          <span> Desculpe, estamos sem procutos ativos </span>
+          <span> Desculpe, estamos sem produtos ativos </span>
         </div>
       </div>
     </div>
