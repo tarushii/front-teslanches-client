@@ -118,7 +118,7 @@ export default function restaurantes() {
         </div>
         <div className="conteinerCardapio flexRow gap2rem">
           { lojas.filter(filtrado).map((loja) => (
-            <div className="boxCardRestaurantes" onClick={() => history.push(`/restaurantes/${loja.id}/perfil`)} aria-hidden="true">
+            <div className="boxCardRestaurantes" onClick={() => history.push(`/restaurantes/${loja.id}/perfil`)} role="button" tabIndex={0}>
               <CustomCard
                 {...loja}
                 recarregarPag={() => setF5(true)}

@@ -13,6 +13,7 @@ export default function CustomCard({
   valor_minimo_pedido,
   imagem_restaurante: imagemRestaurante,
   imagemProduto,
+  imagem_produto: imagemProd,
 }) {
   return (
 
@@ -29,10 +30,13 @@ export default function CustomCard({
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             <div className="valorBox">
-              <span className="campoPrecoPadrao">
+              <span className="campoPrecoPadrao" id="campoPrecoPadrao">
                 {precoConvertido(valor_minimo_pedido)}
               </span>
-              <span className="campoPrecoCart">
+              <span className="campoPrecoProd" id="campoPrecoProd">
+                {precoConvertido(preco)}
+              </span>
+              <span className="campoPrecoCart" id="campoPrecoCart">
                 {precoConvertido(preco)}
               </span>
             </div>
@@ -42,6 +46,7 @@ export default function CustomCard({
       <div className="flexRow mr1rem">
         <img className="imgCard" src={`${imagemRestaurante}`} alt="foto do restaurante" />
         <img className="imgCardCart" src={`${imagemProduto}`} alt={`foto de ${nome}`} />
+        <img className="imgCardProd" src={`${imagemProd}`} alt={`foto de ${nome}`} />
       </div>
 
     </card>

@@ -172,10 +172,22 @@ button.addRestaurantes{
   color: rgba(7, 13, 27, 0.7);
 }
 
-.conteinerCardapio .campoQuantidade{
+.conteinerCardapio #campoQuantidade{
   display: none;
 }
 
- .boxCardRestaurantes .campoPrecoCart{
+.boxCardRestauranteProfile .campoPrecoCart{
+  display: none;
+}
+
+#campoPrecoPadrao{
+  display: unset;
+}
+
+.conteinerCardapio #campoPrecoProd{
+  display: none;
+}
+
+ .boxCardRestaurantes #campoPrecoCart {
     display: none;
   }
