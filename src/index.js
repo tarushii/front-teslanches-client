@@ -9,7 +9,7 @@ ReactDOM.render(
     <Routes />
     <ToastContainer
       position="top-left"
-      autoClose={3000}
+      autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
       closeOnClick
