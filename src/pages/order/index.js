@@ -19,6 +19,7 @@ import iconeCarrinho from '../../assets/carrinho.svg';
 import Cart from '../cart';
 
 export default function PedidoProduto({
+  cart,
   id,
   nome,
   descricao,
