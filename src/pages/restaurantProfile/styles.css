@@ -30,6 +30,15 @@
     line-height: 170%;
     z-index: 3;
   }
+
+  .btHome{
+    margin-left: 20rem;
+    z-index: 3;
+  }
+
+  .btHome:hover{
+    color: #FFF;
+  }
   
   .avatarRestaurante{
     position: absolute;

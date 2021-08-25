@@ -33,6 +33,7 @@ export default function produtos() {
   const {
     user, token, deslogar, setCarrinhoLS, setRestauranteLS, cart
   } = useAuth();
+  const history = useHistory();
   const [prod, setProd] = useState([]);
   const [f5, setF5] = useState(false);
   const [restaurante, setRestaurante] = useState([]);
@@ -139,6 +140,7 @@ export default function produtos() {
           <h1 className="nomeRestaurante">{ restaurante.nome }</h1>
           <button className="btLogout logout" type="button" onClick={deslogar}>Logout</button>
         </div>
+        <button className="btTransparente btHome" type="button" onClick={() => history.push('/restaurantes')}> Home </button>
       </div>
       <img className="vetorProdutos" src={illustrationTop} alt="vetor" />
       <img src={restaurante.imagem_restaurante} alt="avatarRestaurante" className="avatarRestaurante" />
