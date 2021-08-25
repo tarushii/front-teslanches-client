@@ -115,6 +115,18 @@ export default function Cart({
     dadosAtualizados.carrinho = carrinho;
 
     try {
+      const { dados: listaDeProduto, ok: listaDeProdutoOK } = await get(`/restaurate/${rest.id}/perfil`, token);
+
+      const produtoAtivo = listaDeProduto.find((item) => item.nome === item.nome.includes(carrinho) && item.ativo === true);
+
+      if (produtoAtivo.length !== carrinho.length) {
+        toast.error('Desculpe, nosso produto foi esgotado');
+        recarregarPag();
+        return;
+      }
+
+      // for (let item = 0; item < produtoAtivo.length; item += 1) if (listaDeProduto[item] !== carrinho[item]) return;
+
       const { dados, ok } = await postAutenticado('/consumidor/registrarPedido', dadosAtualizados, token);
 
       if (!ok) {

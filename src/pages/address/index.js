@@ -20,7 +20,6 @@ import {
 } from '../../validation/toastfy';
 
 import carrinho from '../../assets/carrinho.svg';
-import iconeConfirma from '../../assets/iconeConfirma.svg';
 
 export default function Address({ setTemEndereco }) {
   const [erro, setErro] = useState('');
@@ -88,7 +87,7 @@ export default function Address({ setTemEndereco }) {
 
       setCarregando(false);
     } catch (error) {
-      toast.error(error.message);
+      // toast.error(error.message);
       setErro(error.message);
     }
     setTemEndereco(data);
@@ -151,16 +150,7 @@ export default function Address({ setTemEndereco }) {
                 </div>
               </div>
             </div>
-            {/* <div className={`${enderecoEnviado ? 'enderecoEnviado' : 'none'} flexColumn contentCenter itemsCenter mt1rem`}>
-              <img id="iconConfirma" src={iconeConfirma} alt="foto de ok" />
-              <p>
-                Endereço adicionado
-                com sucesso!
-              </p>
-              <button className="btLaranja" type="button" onClick={handleClose}>
-                Voltar para o carrinho
-              </button>
-            </div> */}
+
           </div>
         </div>
       </Dialog>
