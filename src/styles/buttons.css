@@ -23,7 +23,7 @@
   font-size: .875rem;
   line-height: 100%;
   text-align: center;
-  color: #F21B1B;
+  color: var(--laranjaEscuro);
   border-radius: 1.25rem;
   cursor: pointer;
 }

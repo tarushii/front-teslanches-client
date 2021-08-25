@@ -36,8 +36,15 @@
     z-index: 3;
   }
 
+  @keyframes changeColor {
+    from {color: var(--laranjaEscuro);}
+    to {color: white;}
+  }
+
   .btHome:hover{
     color: #FFF;
+    animation-name: changeColor;
+    animation-duration: 1s;
   }
   
   .avatarRestaurante{
