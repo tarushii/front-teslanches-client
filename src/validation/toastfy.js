@@ -6,7 +6,7 @@ function toastNome() {
   toast.error('O campo nome é obrigatorio', { toastId: customId });
 }
 function toastEmail() {
-  toast.error('O email é obrigatorio', { toastId: customId });
+  toast.error('Um e-mail válido é obrigatorio', { toastId: customId });
 }
 function toastTelefone() {
   toast.error('O campo telefone é obrigatorio', { toastId: customId });

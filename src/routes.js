@@ -24,8 +24,7 @@ export default function Routes() {
     <AuthProvider>
       <Router>
         <Switch>
-          <Route path="/" exact component={SigIn} />
-          <Route path="/login" component={SigIn} />
+          <Route path={['/', '/login']} exact component={SigIn} />
           <Route path="/cadastro" component={SingUp} />
           <RotasProtegidas>
             <Route path="/restaurantes/:id/perfil" component={perfilRestaurante} />

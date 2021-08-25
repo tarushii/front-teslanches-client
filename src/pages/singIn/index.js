@@ -17,7 +17,7 @@ import illustrationCenter from '../../assets/image-login.svg';
 export default function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
+    reValidateMode: '',
     defaultValues: {},
     context: undefined,
     criteriaMode: 'firstError',
@@ -26,7 +26,6 @@ export default function SignIn() {
     resolver: yupResolver(schemaLogin)
   });
   const [password, setPassword] = useState('');
-  const [erro, setErro] = useState('');
   const [carregando, setCarregando] = useState(false);
   const history = useHistory();
   const { logar } = useAuth();
@@ -34,13 +33,11 @@ export default function SignIn() {
 
   async function onSubmit(data) {
     setCarregando(true);
-    setErro('');
     try {
       const { dados, ok } = await postNaoAutenticado('/login', data);
       setCarregando(false);
 
       if (!ok) {
-        setErro(dados);
         toast.error(dados, { toastId: customId });
         return;
       }
@@ -48,7 +45,6 @@ export default function SignIn() {
       history.push('/restaurantes');
     } catch (error) {
       toast.error(error.message, { toastId: customId });
-      setErro(`Erro:${error.message}`);
     }
     setCarregando(false);
   }
@@ -72,12 +68,12 @@ export default function SignIn() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flexColumn mb1rem">
                 <label htmlFor="email">Email</label>
-                <input id="email" type="text" {...register('email', { required: true })} />
+                <input id="email" type="text" {...register('email')} />
               </div>
               <InputPassword
                 id="senha"
                 label="Senha"
-                register={() => register('senha', { required: true, minLength: 8 })}
+                register={() => register('senha')}
                 value={password}
                 setValue={setPassword}
               />
