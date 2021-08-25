@@ -154,6 +154,7 @@ export default function produtos() {
           />
         ) : ('')}
       </div>
+
       <div className="icons">
         <div className="icons1">
           <h3>
@@ -162,6 +163,7 @@ export default function produtos() {
             <span>Pedido Minimo: </span>
             $
             {restaurante.valor_minimo_pedido / 100}
+            ,00
           </h3>
         </div>
         <div>
@@ -172,10 +174,14 @@ export default function produtos() {
 
             {restaurante.tempo_entrega_minutos}
             {' '}
-            minutos, aproximadamente
+            minutos
           </h3>
         </div>
+        <div className="descricao">
+          {restaurante.descricao}
+        </div>
       </div>
+
       <div className={`${prod.length === 0 ? 'none' : 'contemProdutos'} flexColunm contentCenter itemsCenter mt2rem`}>
 
         <div className="conteinerCardapio2 flexRow gap2rem">

@@ -159,18 +159,42 @@
     margin-top: -8rem;
     margin-bottom: 4rem;
     font-size: 0.875rem;
+    text-align: center;
   }
+
+  h3{
+    display: flex;
+    font-weight: 400;
+    color: #525459;
+  }
+
+  h3 span{
+    margin-right: 0.3rem;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
   .icons .icons1{
     margin-right: 2rem;
   }
 
   .icons img {
     margin-right: 0.4rem;
+    align-items: center;
+  }
+
+  .icons .descricao{
+    margin-left: 10rem;
+    font-size: 1rem;
   }
 
   .botaoCarrinho{
     margin-left: 35rem;
     margin-top: 4.3rem;
+  }
+
+  .botaoCarrinho #btOpenCart{
+    margin-bottom: 4rem;
   }
 
   .retangulo{
