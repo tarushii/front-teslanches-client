@@ -75,10 +75,10 @@ export default function Address({ setTemEndereco }) {
         .filter(([, value]) => value));
     dadosAtualizados.id = rest.id;
     dadosAtualizados.consumidor_id = user.ID;
-    dadosAtualizados.consumidor_email = user.Email;
+    dadosAtualizados.email = user.Email;
 
     try {
-      const { dados, ok } = await postAutenticado('/consumidor/adicionarEndereco', dadosAtualizados, token);
+      const { dados, ok } = await patch('/consumidor/adicionarEndereco', dadosAtualizados, token);
       if (!ok) {
         setErro(dados);
         toast.error(dados);
