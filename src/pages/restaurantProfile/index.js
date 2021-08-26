@@ -207,7 +207,7 @@ export default function produtos() {
       <div className={`${prod.length === 0 ? 'addProdutos' : 'none'} flexColunm contentCenter itemsCenter`}>
         <div className="retangulo">
           <img src={emptyStore} alt="Loja sem produtos disponiveis" />
-          <span> Desculpe, estamos sem produtos ativos </span>
+          <span> Desculpe, estamos sem produtos ativos no momento </span>
         </div>
       </div>
     </div>

@@ -214,13 +214,20 @@
   }
 
   .retangulo{
-    margin-top:-8rem;
+    margin-top:4rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: #F9F9F9;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
-   padding: 14rem;
+    box-shadow: 0px 0.25rem 0.625rem rgba(0, 0, 0, 0.05);
+    border-radius: 1.25rem;
+    padding: 5rem;
+  }
+
+  .retangulo img{
+    height: 15rem;
+    width: 10rem;
   }
 
   .retangulo span{
