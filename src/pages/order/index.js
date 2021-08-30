@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -8,7 +9,6 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import useStyles from './styles';
-import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 
 import minusIcon from '../../assets/minusIcon.svg';
@@ -19,18 +19,14 @@ import iconeCarrinho from '../../assets/carrinho.svg';
 import Cart from '../cart';
 
 export default function PedidoProduto({
-  cart,
   id,
   nome,
   descricao,
   preco,
-  imagem,
-  recarregarPag,
   handleCarrinho,
   imagem_produto: imagemProduto,
   valor_minimo_pedido: valorMinimo,
   tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega,
   imagem_restaurante: avatarRestaurante,
   carrinho,
   subTotal,
@@ -41,9 +37,8 @@ export default function PedidoProduto({
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
-  const customId = 'custom-id-yes';
   const {
-    register, handleSubmit, formState: { errors }
+    handleSubmit
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: '',
