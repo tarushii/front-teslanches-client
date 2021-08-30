@@ -22,6 +22,7 @@ import CustomCard from '../../components/customCard';
 // import iconeConfirma from '../../assets/iconeConfirma.svg';
 import iconeSemPedido from '../../assets/semPedidos.svg';
 import Address from '../address';
+import OrderEdit from '../../components/orderEdit';
 
 export default function Cart({
   carrinho,
@@ -234,12 +235,15 @@ export default function Cart({
                         {...produto}
                         verificaAtivo="tem que por"
                       />
-                      <Order
+                      <OrderEdit
+                        {...produto}
                         carrinho={carrinho}
                         subTotal={subTotal}
-                        {...cart}
-                        {...newRest}
                         handleCarrinho={handleCarrinho}
+                        avatarRestaurante={avatarRestaurante}
+                        valorMinimo={valorMinimo}
+                        tempoMinutos={tempoMinutos}
+                        imagemProduto={produto.imagemProduto}
                       />
                     </div>
                   ))}
