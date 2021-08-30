@@ -156,10 +156,6 @@ export default function PedidoProduto({
                     <span id="textoQuantidade">{quantidade}</span>
                     <button id="plus" type="button" onClick={() => setQuantidade(quantidade + 1)}><img id="plusIcon" src={plusIcon} alt="plus icon" /></button>
                   </div>
-
-                  {/* TODO - agora so preciso registrar quantidade + preco
-                  e enviar data pro locStorage */}
-
                   <button id="btAddCarrinho" className="btLaranja" type="submit" onClick={handleSubmit(onSubmit)}>
                     Adicionar ao Carrinho
                   </button>
@@ -167,7 +163,7 @@ export default function PedidoProduto({
               </form>
             </div>
             <div className="boxRevisaoPedido flexRow contentCenter mt1rem">
-              <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" />
+              <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" handleCarrinho={handleCarrinho} />
             </div>
           </div>
         </div>
