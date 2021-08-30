@@ -7,7 +7,7 @@ import './styles.css';
 import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
 import CustomCard from '../../components/customCard';
@@ -15,9 +15,6 @@ import CustomCard from '../../components/customCard';
 import illustrationTop from '../../assets/illustration-top.svg';
 import avatarPadrao from '../../assets/avatar-padrao.gif';
 import logoRestaurante from '../../assets/logo-restaurantes.svg';
-import DetalheProduto from '../order';
-import Cart from '../cart';
-import Address from '../address';
 
 export default function restaurantes() {
   const { user, token, deslogar } = useAuth();
