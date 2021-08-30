@@ -231,3 +231,11 @@
   cursor: pointer;
   color: transparent;
 }
+
+.conteinerEndereco .titleAddress{
+  font-style: normal;
+  font-weight: bold;
+  font-size: .875rem;
+  line-height: 170%;
+  color: #D13201;
+}

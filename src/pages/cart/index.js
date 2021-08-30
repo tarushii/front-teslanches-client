@@ -76,7 +76,7 @@ export default function Cart({
   useEffect(() => {
     async function buscarEndereco() {
       try {
-        const { dados, ok } = await get(`/consumidor/${user.ID}/endereco`, token);
+        const { dados, ok } = await get('/consumidor/endereco', token);
 
         if (!ok) {
           toast.error(dados, { toastId: customId });
@@ -85,11 +85,12 @@ export default function Cart({
         if (!dados) {
           return;
         }
-        setTemEndereco(dados);
+        setTemEndereco(dados[0]);
       } catch (error) {
         toast.error(error.message, { toastId: customId });
       }
     }
+    buscarEndereco();
   }, []);
 
   async function onSubmit(data) {
@@ -190,25 +191,16 @@ export default function Cart({
               <Address setTemEndereco={setTemEndereco} />
             </div>
             <div className={`${temEndereco.length === 0 ? 'none' : 'conteinerEndereco'} px3rem mb2rem flewRow gap06rem`}>
-              <span>
-                CEP
-                {' '}
-                { temEndereco.cep }
+              <span className="titleAddress">
+                Endereço de entrega:
                 {' '}
               </span>
               <span>
-                {' '}
-                Endereço
-                {' '}
                 { temEndereco.endereco }
-                {' '}
-              </span>
-              <span>
-                {' '}
-                Complemento
-                {' '}
+                {' - '}
                 { temEndereco.complemento }
-                {' '}
+                {' - '}
+                { temEndereco.cep }
               </span>
             </div>
             <div className={`${carinhoVazio ? 'none' : 'midCart'}`}>
