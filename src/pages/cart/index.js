@@ -31,14 +31,16 @@ export default function Cart({
   nomeAbrirCart
 }) {
   const [erro, setErro] = useState('');
-  const [temEndereco, setTemEndereco] = useState([]);
+  const [temEndereco, setTemEndereco] = useState();
   const [open, setOpen] = useState(false);
   // const [pedidoEnviado, setPedidoEnviado] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
   const customId = 'custom-id-yes';
   const {
-    user, token, rest
+    user,
+    token,
+    rest,
   } = useAuth();
   const carinhoVazio = carrinho.length === 0;
   const {
@@ -90,7 +92,7 @@ export default function Cart({
     setErro('');
 
     // TODO - verificar se ta ativo
-    if (temEndereco.length === 0) {
+    if (!temEndereco) {
       toast.error('É preciso informar um endereço para a entrega');
       return;
     }
@@ -113,8 +115,6 @@ export default function Cart({
 
       const produtoAtivo = listaDeProdutos.find((item) => item.nome === item.nome.includes(carrinho) && item.ativo === true);
 
-      console.log({ listaDeProdutos });
-
       if (produtoAtivo.length !== carrinho.length) {
         toast.error('Desculpe, nosso produto foi esgotado');
         recarregarPag();
@@ -133,7 +133,6 @@ export default function Cart({
 
       setCarregando(false);
     } catch (error) {
-      toast.error(error.message);
       setErro(error.message);
     }
     emptyCart();
@@ -181,20 +180,20 @@ export default function Cart({
                 &times;
               </button>
             </div>
-            <div className={`${temEndereco.length === 0 ? 'conteinerFaltaEndereco' : 'none'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
+            <div className={`${temEndereco ? 'none' : 'conteinerFaltaEndereco'} px2rem flexRow itemsCenter ml3rem mb2rem`}>
               <Address setTemEndereco={setTemEndereco} />
             </div>
-            <div className={`${temEndereco.length === 0 ? 'none' : 'conteinerEndereco'} px3rem mb2rem flewRow gap06rem`}>
+            <div className={`${temEndereco ? 'conteinerEndereco' : 'none'} px3rem mb2rem flewRow gap06rem`}>
               <span className="titleAddress">
                 Endereço de entrega:
                 {' '}
               </span>
               <span>
-                { temEndereco.endereco }
+                { temEndereco && temEndereco.endereco }
                 {' - '}
-                { temEndereco.complemento }
+                { temEndereco && temEndereco.complemento }
                 {' - '}
-                { temEndereco.cep }
+                { temEndereco && temEndereco.cep }
               </span>
             </div>
             <div className={`${carinhoVazio ? 'none' : 'midCart'}`}>
@@ -261,23 +260,7 @@ export default function Cart({
                 </form>
               </div>
             </div>
-            {/* <div className={`${pedidoEnviado ? 'pedidoEnviado' : 'none'} flexColumn contentCenter itemsCenter mt1rem`}>
-              <img id="iconConfirma" src={iconeConfirma} alt="foto de ok" />
-              <p>
-                Pedido Confirmado!
-                <br />
-                Agora é só aguardar o seu pedido
-              </p>
-              <button className="btLaranja" type="button" onClick={handleClose}>
-                Voltar para cardápio
-              </button>
-            </div> */}
             <div className={`${carinhoVazio ? 'semPedidos' : 'none'} flexColumn contentCenter itemsCenter mt1rem px3rem`}>
-              <p>
-                <span>Endereço de Entrega:</span>
-                {' '}
-                Av. Tancredo Neves, 2227, ed. Salvador Prime, sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021
-              </p>
               <img id="iconSemPedidos" src={iconeSemPedido} alt="foto de ok" />
             </div>
           </div>
