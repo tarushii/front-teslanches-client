@@ -152,6 +152,7 @@ export default function produtos() {
             {...restaurante}
             recarregarPag={() => setF5(true)}
             emptyCart={() => setCarrinho([])}
+            handleCarrinho={handleCarrinho}
             nomeAbrirCart="Revisar pedido"
           />
         ) : ('')}

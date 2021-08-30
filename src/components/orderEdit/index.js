@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import useStyles from './styles';
-import { postEstadoProduto, put } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
 
 import minusIcon from '../../assets/minusIcon.svg';
@@ -16,10 +15,8 @@ import plusIcon from '../../assets/plusIcon.svg';
 import iconRelogio from '../../assets/relogio.svg';
 import iconMoney from '../../assets/money.svg';
 import iconeCarrinho from '../../assets/carrinho.svg';
-import Cart from '../cart';
 
-export default function PedidoProduto({
-  cart,
+export default function OrderEdit({
   id,
   nome,
   descricao,
@@ -27,17 +24,19 @@ export default function PedidoProduto({
   imagem,
   recarregarPag,
   handleCarrinho,
-  imagem_produto: imagemProduto,
-  valor_minimo_pedido: valorMinimo,
-  tempo_entrega_minutos: tempoMinutos,
-  taxa_entrega: taxaEntrega,
-  imagem_restaurante: avatarRestaurante,
+  imagemProduto,
+  valorMinimo,
+  tempoMinutos,
+  taxaEntrega,
+  avatarRestaurante,
   carrinho,
   subTotal,
   restaurante
 }) {
+  const editQuantidade = carrinho[0].quantidade;
+  console.log(editQuantidade);
   const [erro, setErro] = useState('');
-  const [quantidade, setQuantidade] = useState(1);
+  const [quantidade, setQuantidade] = useState(editQuantidade);
   const [open, setOpen] = useState(false);
   const [carregando, setCarregando] = useState(false);
   const classes = useStyles();
@@ -162,9 +161,7 @@ export default function PedidoProduto({
                 </div>
               </form>
             </div>
-            <div className="boxRevisaoPedido flexRow contentCenter mt1rem">
-              <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" handleCarrinho={handleCarrinho} />
-            </div>
+            <div className="boxRevisaoPedido flexRow contentCenter mt1rem" />
           </div>
         </div>
       </Dialog>
