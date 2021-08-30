@@ -82,10 +82,14 @@ export default function produtos() {
     const novoCarrinho = [...carrinho];
     const temNoCarrinho = novoCarrinho.find((item) => item.nome === produto.nome);
 
-    setSubTotal(subTotal + produto.preco * produto.quantidade);
-
     if (temNoCarrinho) {
-      temNoCarrinho.quantidade = produto.quantidade;
+      if (temNoCarrinho.quantidade > produto.quantidade) {
+        setSubTotal(subTotal - produto.preco * (temNoCarrinho.quantidade - produto.quantidade));
+        temNoCarrinho.quantidade = produto.quantidade;
+      } else {
+        setSubTotal(subTotal + produto.preco * (produto.quantidade - temNoCarrinho.quantidade));
+      }
+
       if (produto.quantidade === 0) {
         setCarrinho(novoCarrinho.filter((item) => item.nome !== produto.nome));
         return;
@@ -93,6 +97,8 @@ export default function produtos() {
       setCarrinho(novoCarrinho);
       return;
     }
+
+    setSubTotal(subTotal + produto.preco * produto.quantidade);
     setCarrinho([...novoCarrinho, {
       id: produto.id,
       nome: produto.nome,
@@ -101,7 +107,7 @@ export default function produtos() {
       valorTotal: (produto.quantidade * produto.preco),
       imagemProduto: produto.imagemProduto,
     }]);
-    setCarrinhoLS(novoCarrinho);
+    // setCarrinhoLS(novoCarrinho);
   }
   const categoriaStyle = () => {
     const categoria = restaurante.categoria_id;
