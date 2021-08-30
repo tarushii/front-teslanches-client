@@ -6,11 +6,13 @@ export default function useAuthProvider() {
   const [usuario, setUsuario, removeUsuario] = useLocalStorage('USUARIO', {});
   const [restauranteLS, setRestauranteLS, removeRestauranteLS] = useLocalStorage('RESTAURANTE', {});
   const [carrinhoLS, setCarrinhoLS, removeCarrinhoLS] = useLocalStorage('CARRINHO', []);
+  const [subTotalLS, setSubTotalLS, removeSubTotalLS] = useLocalStorage('SUBTOTAL', []);
 
   const [user, setUser] = useState(usuario);
   const [token, setToken] = useState(tokenPersistido);
   const [rest, setRest] = useState(restauranteLS);
   const [cart, setCart] = useState(carrinhoLS);
+  const [sub, setSub] = useState(subTotalLS);
 
   const logar = (usuario, token) => {
     setToken(token);
@@ -25,24 +27,30 @@ export default function useAuthProvider() {
     removeUsuario();
   };
 
-  function adicionarNoCarrinho(carrinho) {
+  function adicionarNoCarrinhoLS(carrinho) {
     setCarrinhoLS(carrinho);
   }
+  function adicionarNoSubTotalLS(subTotal) {
+    setSubTotalLS(subTotal);
+  }
 
-  function removerDoCarrinho() {
+  function removerDoCarrinhoLS() {
     removeCarrinhoLS();
+    removeSubTotalLS();
   }
 
   return {
     user,
+    rest,
     token,
     logar,
     deslogar,
-    setCarrinhoLS,
-    removeCarrinhoLS,
-    cart,
     setRestauranteLS,
     removeRestauranteLS,
-    rest
+    adicionarNoCarrinhoLS,
+    adicionarNoSubTotalLS,
+    removerDoCarrinhoLS,
+    cart,
+    sub,
   };
 }
