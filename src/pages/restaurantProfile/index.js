@@ -6,7 +6,7 @@ import './styles.css';
 import '../../styles/global.css';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { get } from '../../services/apiClient';
 import Order from '../order';
@@ -31,7 +31,7 @@ import emptyStore from '../../assets/emptyStore.svg';
 
 export default function produtos() {
   const {
-    user, token, deslogar, setCarrinhoLS, setRestauranteLS, cart
+    token, deslogar, setRestauranteLS
   } = useAuth();
   const history = useHistory();
   const [prod, setProd] = useState([]);
