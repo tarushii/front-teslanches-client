@@ -98,7 +98,7 @@
     grid-template-columns: repeat(2, 37.5rem);
     grid-auto-rows: 15rem ;
     gap: 3rem;
-    margin-left: 15rem;
+    margin-left: 25rem;
     max-width: 80rem;
     height: 18.75rem;
   }
