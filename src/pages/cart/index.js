@@ -14,12 +14,10 @@ import { useForm } from 'react-hook-form';
 import useStyles from './styles';
 import { get, postAutenticado } from '../../services/apiClient';
 import precoConvertido from '../../formatting/currency';
-import Order from '../order';
 import useAuth from '../../hooks/useAuth';
 
 import iconeCarrinho from '../../assets/carrinho.svg';
 import CustomCard from '../../components/customCard';
-// import iconeConfirma from '../../assets/iconeConfirma.svg';
 import iconeSemPedido from '../../assets/semPedidos.svg';
 import Address from '../address';
 import OrderEdit from '../../components/orderEdit';
@@ -27,18 +25,12 @@ import OrderEdit from '../../components/orderEdit';
 export default function Cart({
   carrinho,
   emptyCart,
-  descricao,
-  restaurante,
   handleCarrinho,
   recarregarPag,
-  imagemProduto,
   subTotal,
-
   nomeAbrirCart
 }) {
   const [erro, setErro] = useState('');
-  const [quantidade, setQuantidade] = useState(0);
-  const [addCarrinho, setAddCarrinho] = useState([]);
   const [temEndereco, setTemEndereco] = useState([]);
   const [open, setOpen] = useState(false);
   // const [pedidoEnviado, setPedidoEnviado] = useState(false);
@@ -46,11 +38,11 @@ export default function Cart({
   const classes = useStyles();
   const customId = 'custom-id-yes';
   const {
-    user, adicionarNoCarrinho, removerDoCarrinho, token, cart, rest
+    user, token, rest
   } = useAuth();
   const carinhoVazio = carrinho.length === 0;
   const {
-    register, handleSubmit, formState: { errors }
+    handleSubmit
   } = useForm({
     mode: 'onSubmit',
     reValidateMode: '',
@@ -117,9 +109,11 @@ export default function Cart({
     dadosAtualizados.carrinho = carrinho;
 
     try {
-      const { dados: listaDeProduto, ok: listaDeProdutoOK } = await get(`/restaurate/${rest.id}/perfil`, token);
+      const { dados: listaDeProdutos } = await get(`/restaurate/${rest.id}/perfil`, token);
 
-      const produtoAtivo = listaDeProduto.find((item) => item.nome === item.nome.includes(carrinho) && item.ativo === true);
+      const produtoAtivo = listaDeProdutos.find((item) => item.nome === item.nome.includes(carrinho) && item.ativo === true);
+
+      console.log({ listaDeProdutos });
 
       if (produtoAtivo.length !== carrinho.length) {
         toast.error('Desculpe, nosso produto foi esgotado');
@@ -142,9 +136,9 @@ export default function Cart({
       toast.error(error.message);
       setErro(error.message);
     }
-    handleClose();
     emptyCart();
     recarregarPag();
+    handleClose();
     toast.success('O pedido foi enviado com sucesso!');
   }
 
