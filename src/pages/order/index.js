@@ -156,9 +156,9 @@ export default function PedidoProduto({
                   </button>
                 </div>
               </form>
-            </div>
-            <div className="boxRevisaoPedido flexRow contentCenter mt1rem">
-              <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" handleCarrinho={handleCarrinho} />
+              <div className="boxRevisaoPedido flexRow contentCenter mt1rem">
+                <Cart carrinho={carrinho} subTotal={subTotal} {...restaurante} nomeAbrirCart="Ir para a revisão do pedido" handleCarrinho={handleCarrinho} />
+              </div>
             </div>
           </div>
         </div>
